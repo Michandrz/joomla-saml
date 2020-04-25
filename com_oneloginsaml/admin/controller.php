@@ -12,9 +12,8 @@ defined('_JEXEC') or die;
 /**
  * oneloginsamlController
  *
- * @since  1.6
  */
-class oneloginsamlController extends JController {
+class oneloginsamlController extends JControllerLegacy {
 
     /**
      * Method to display a view.
@@ -24,7 +23,6 @@ class oneloginsamlController extends JController {
      *
      * @return  oneloginsamlController This object to support chaining.
      *
-     * @since   1.5
      */
     public function display($cachable = false, $urlparams = array()) {
 
