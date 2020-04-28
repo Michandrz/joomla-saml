@@ -18,24 +18,26 @@ CREATE TABLE `#__oneloginsaml_config` (
     PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB 
-DEFAULT CHARSET=utf8mb4 
+CHARACTER SET=utf8mb4 
 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `#__oneloginsaml_attrmap` (
     `id`    int(11)	NOT NULL AUTO_INCREMENT,
     `local` text	NOT NULL,
     `idp`   text	NOT NULL,
+    PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB 
-DEFAULT CHARSET=utf8mb4 
+CHARACTER SET=utf8mb4 
 DEFAULT COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `#__oneloginsaml_groupmap` (
     `id`    int(11)	NOT NULL AUTO_INCREMENT,
     `local` int(11)	NOT NULL,
-    `idp`   text	NOT NULL
+    `idp`   text	NOT NULL,
+    PRIMARY KEY (`id`)
 )
 ENGINE=InnoDB 
-DEFAULT CHARSET=utf8mb4 
+CHARACTER SET=utf8mb4 
 DEFAULT COLLATE=utf8mb4_unicode_ci;
