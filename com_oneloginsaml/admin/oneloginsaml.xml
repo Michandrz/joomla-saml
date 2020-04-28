@@ -71,7 +71,6 @@
 <filename>sql/updates/mysql/index.html</filename>
 <filename>sql/install.mysql.utf8.sql</filename>
 <filename>sql/uninstall.mysql.utf8.sql</filename>
-
 	</files>
 	<languages folder="admin">
 	    <language tag="en-US">language/en-US.com_oneloginsaml.ini</language>
