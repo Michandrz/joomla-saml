@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.1" method="upgrade">
+    <name>OneLogin SAML Plugin Config</name>
+    <author>OneLogin Inc.</author>
+    <creationDate>Arpil 2020</creationDate>
+    <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
+    <license>MIT</license>
+    <authorEmail>support@onelogin.com</authorEmail>
+    <authorUrl>onelogin.com</authorUrl>
+    <version>3.0.0</version>
+    <description>COM_ONELOGIN_XML_DESCRIPTION</description>
+    <install> 
+	    <sql>
+		    <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+	    </sql>
+    </install>
+    <uninstall> 
+	    <sql>
+		    <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+	    </sql>
+    </uninstall>
+    <update> 
+	    <schemas>
+		    <schemapath type="mysql">sql/updates/mysql</schemapath>
+	    </schemas>
+    </update>
+    <administration>
+	    <menu link='index.php?option=com_oneloginsaml'>OneLogin</menu>
+	    <files folder="admin">
+<folder>/admin</folder>
+<folder>/admin/language</folder>
+<folder>/admin/language/en-US</folder>
+<folder>/admin/models</folder>
+<folder>/admin/controllers</folder>
+<folder>/admin/views</folder>
+<folder>/admin/views/oneloginsaml</folder>
+<folder>/admin/views/oneloginsaml/tmpl</folder>
+<folder>/admin/sql</folder>
+<folder>/admin/sql/updates</folder>
+<folder>/admin/sql/updates/mysql</folder>
+<filename>admin/controller.php</filename>
+<filename>admin/index.html</filename>
+<filename>admin/language/index.html</filename>
+<filename>admin/language/en-US/en-us.com_oneloginsaml.ini</filename>
+<filename>admin/language/en-US/en-us.com_oneloginsaml.sys.ini</filename>
+<filename>admin/models/index.html</filename>
+<filename>admin/models/attributes.php</filename>
+<filename>admin/config.xml</filename>
+<filename>admin/oneloginsaml.php</filename>
+<filename>admin/controllers/index.html</filename>
+<filename>admin/views/oneloginsaml/index.html</filename>
+<filename>admin/views/oneloginsaml/tmpl/index.html</filename>
+<filename>admin/views/oneloginsaml/tmpl/default.php</filename>
+<filename>admin/views/oneloginsaml/view.html.php</filename>
+<filename>admin/views/index.html</filename>
+<filename>admin/sql/index.html</filename>
+<filename>admin/sql/updates/index.html</filename>
+<filename>admin/sql/updates/mysql/0.0.1.sql</filename>
+<filename>admin/sql/updates/mysql/index.html</filename>
+<filename>admin/sql/install.mysql.utf8.sql</filename>
+<filename>admin/sql/uninstall.mysql.utf8.sql</filename>
+	    </files>
+	    <languages folder="admin">
+		    <language tag="en-US">language/en-US.com_oneloginsaml.ini</language>
+		    <language tag="en-US">language/en-US.com_oneloginsaml.sys.ini</language>
+	    </languages>
+    </administration>
+</extension>
+
+
