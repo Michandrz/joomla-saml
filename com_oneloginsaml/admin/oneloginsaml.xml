@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="3.1" method="upgrade">
-    <name>OneLogin SAML Plugin Config</name>
+<extension type="component" version="3.3" method="upgrade">
+    <name>OneLogin SAML</name>
     <author>OneLogin Inc.</author>
     <creationDate>Arpil 2020</creationDate>
     <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
@@ -26,6 +26,9 @@
     </update>
     <administration>
 	<menu link='index.php?option=com_oneloginsaml'>OneLogin</menu>
+	<submenu>
+	    
+	</submenu>
 	<files folder="admin">
 	    <folder>language</folder>
 	    <folder>language/en-US</folder>
@@ -62,6 +65,8 @@
 	<languages folder="admin">
 	    <language tag="en-US">language/en-US.com_oneloginsaml.ini</language>
 	    <language tag="en-US">language/en-US.com_oneloginsaml.sys.ini</language>
+	    <language tag="en-GB">language/en-GB.com_oneloginsaml.ini</language>
+	    <language tag="en-GB">language/en-GB.com_oneloginsaml.sys.ini</language>
 	</languages>
     </administration>
 </extension>

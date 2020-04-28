@@ -17,6 +17,6 @@ class oneloginsamlController extends JControllerLegacy {
      * The default view
      * @var string
      */
-     protected $default_View = "onelogin";
+     protected $default_View = "oneloginsaml";
      
 }
