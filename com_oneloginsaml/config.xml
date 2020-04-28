@@ -25,6 +25,7 @@
 	    </schemas>
     </update>
     <administration>
+	    <menu link='index.php?option=com_oneloginsaml'>OneLogin</menu>
 	    <files folder="admin">
 		    <filename>config.xml</filename>
 		    <filename>oneloginsaml.php</filename>
