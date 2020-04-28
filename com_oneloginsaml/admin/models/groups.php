@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
  * @package     OneLogin SAML
  * @subpackage  
  * 
@@ -8,15 +8,24 @@
  * @license     MIT
  * @author Michael Andrzejewski
  */
-defined('_JEXEC') or die('Restricted access');
 
 
 /**
- * Attribute CRUDI Model
- * @since 1.0
+ * @package    
+ * @subpackage 
+ * 
+ * @copyright  
+ * @license    
+ * @author     
  */
-class oneloginsamlModelAttribute extends JModelList
+
+/**
+ *  CRUDI model for groups
+ * 
+ */
+class groupsModel extends JModelLegacy
 {
+    
 
     const DB_TABLE = '#__oneloginsaml_attrmap';
     const DB_ID	 = 'id';
@@ -39,12 +48,12 @@ class oneloginsamlModelAttribute extends JModelList
     }
 
     /**
-     * Creates a new attribute mapping and saves it to the database
+     * Creates a new group mapping and saves it to the database
      * 
-     * @param attributeMapping $attrmapping The mapping to save. Updated with ID post save
+     * @param groupMapping $attrmapping The mapping to save. Updated with ID post save
      * @return boolean true on success
      */
-    public function create(attributeMapping &$attrmapping)
+    public function create(groupMapping &$attrmapping)
     {
 
 	//make sure we're saving something we know how to handle
@@ -96,7 +105,7 @@ class oneloginsamlModelAttribute extends JModelList
 
     public function update($attrmapping = null)
     {
-	if (!is_a($attrmapping, groupMapping))
+	if (!is_a($attrmapping, attributeMapping))
 	{
 	    return FALSE;
 	}
@@ -160,7 +169,7 @@ class oneloginsamlModelAttribute extends JModelList
  * @attrubute object
  * @since 1.0
  */
-class attributeMapping
+class groupMapping
 {
 
     /**
