@@ -13,7 +13,7 @@ DROP TABLE IF EXISTS `#__oneloginsaml_groupmap`;
 
 CREATE TABLE `#__oneloginsaml_config` (
     `id`    int(11)	NOT NULL AUTO_INCREMENT,
-    `param` carchar(25)	NOT NULL,
+    `param` varchar(25)	NOT NULL,
     `value` text	DEFAULT '',
     PRIMARY KEY (`id`)
 )
