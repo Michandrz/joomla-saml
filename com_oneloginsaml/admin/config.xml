@@ -27,7 +27,38 @@
     <administration>
 	    <menu link='index.php?option=com_oneloginsaml'>OneLogin</menu>
 	    <files folder="admin">
-		    <!-- @TODO Files Section -->
+<folder>admin</folder>
+<folder>admin/language</folder>
+<folder>admin/language/en-US</folder>
+<folder>admin/models</folder>
+<folder>admin/controllers</folder>
+<folder>admin/views</folder>
+<folder>admin/views/oneloginsaml</folder>
+<folder>admin/views/oneloginsaml/tmpl</folder>
+<folder>admin/sql</folder>
+<folder>admin/sql/updates</folder>
+<folder>admin/sql/updates/mysql</folder>
+<filename>admin/controller.php</filename>
+<filename>admin/index.html</filename>
+<filename>admin/language/index.html</filename>
+<filename>admin/language/en-US/en-us.com_oneloginsaml.ini</filename>
+<filename>admin/language/en-US/en-us.com_oneloginsaml.sys.ini</filename>
+<filename>admin/models/index.html</filename>
+<filename>admin/models/attributes.php</filename>
+<filename>admin/config.xml</filename>
+<filename>admin/oneloginsaml.php</filename>
+<filename>admin/controllers/index.html</filename>
+<filename>admin/views/oneloginsaml/index.html</filename>
+<filename>admin/views/oneloginsaml/tmpl/index.html</filename>
+<filename>admin/views/oneloginsaml/tmpl/default.php</filename>
+<filename>admin/views/oneloginsaml/view.html.php</filename>
+<filename>admin/views/index.html</filename>
+<filename>admin/sql/index.html</filename>
+<filename>admin/sql/updates/index.html</filename>
+<filename>admin/sql/updates/mysql/0.0.1.sql</filename>
+<filename>admin/sql/updates/mysql/index.html</filename>
+<filename>admin/sql/install.mysql.utf8.sql</filename>
+<filename>admin/sql/uninstall.mysql.utf8.sql</filename>
 	    </files>
 	    <languages folder="admin">
 		    <language tag="en-US">language/en-US.com_oneloginsaml.ini</language>
