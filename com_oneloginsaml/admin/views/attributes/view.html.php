@@ -10,7 +10,6 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-
 class oneloginsamlViewAttributes extends JViewLegacy
 {
 
@@ -18,6 +17,7 @@ class oneloginsamlViewAttributes extends JViewLegacy
     {
 	$this->items		 = $this->get('Items');
 	$this->pagination	 = $this->get('Pagination');
+
 
 	// Check for errors.
 	if (count($errors = $this->get('Errors')))
@@ -27,8 +27,18 @@ class oneloginsamlViewAttributes extends JViewLegacy
 	    return false;
 	}
 
+	$this->addToolBar();
+
 	// Display the template
 	parent::display($tpl);
+    }
+
+    protected function addToolBar()
+    {
+	JToolbarHelper::title(JText::_('COM_ONELOGIN_MANAGER_ATTRIBUTES'));
+	JToolbarHelper::addNew('attributes.newButton');
+	JToolbarHelper::editList('attributes.editButton');
+	JToolbarHelper::deleteList('', 'attributes.delete');
     }
 
 }
