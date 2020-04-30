@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<form>
+    <fieldset>
+	<field
+	    name="id"
+	    type="hidden"
+	/>
+	<field
+	    name="local"
+	    type="sql"
+	    label="COM_ONELOGINSAML_GROUP_LOCAL_LABEL"
+	    description="COM_ONELOGINSAML_GROUP_LOCAL_DESC"
+	    class="inputbox"
+	    query="SELECT `id` AS `value`, `title` as `local` FROM `#__usergroups`"
+	/>
+	<field
+	    name="idp"
+	    type="text"
+	    label="COM_ONELOGINSAML_GROUP_IDP_LABEL"
+	    description="COM_ONELOGINSAML_GROUP_IDP_DESC"
+	    size="40"
+	    class="inputbox"
+	    default=""
+	/>
+    </fieldset>
+</form>
