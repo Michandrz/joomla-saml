@@ -41,10 +41,6 @@ class oneloginsamlModelGroups extends JModelList
 	}
     }
 
-    /**
-     * 
-     * @return array Array of attributeMapping objects
-     */
     protected function getListQuery()
     {
 	$query = $this->db->getQuery(true);

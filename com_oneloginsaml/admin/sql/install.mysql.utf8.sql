@@ -51,13 +51,3 @@ CREATE VIEW `#__oneloginsaml_groupmapview` AS
 	`#__oneloginsaml_groupmap`.`idp` as `idp`
     FROM `#__oneloginsaml_groupmap`
     JOIN `#__usergroups` ON  `#__oneloginsaml_groupmap`.`local` = `#__usergroups`.`id`;
-
-
-CREATE VIEW `lyqp8_oneloginsaml_groupmapview` AS
-    SELECT 
-	`lyqp8_oneloginsaml_groupmap`.`id` as `id`,
-	`lyqp8_usergroups`.`title` as `localName`,
-	`lyqp8_oneloginsaml_groupmap`.`local` as `local`, 
-	`lyqp8_oneloginsaml_groupmap`.`idp` as `idp`
-    FROM `lyqp8_oneloginsaml_groupmap`
-    JOIN `lyqp8_usergroups` ON  `lyqp8_oneloginsaml_groupmap`.`local` = `lyqp8_usergroups`.`id`;
