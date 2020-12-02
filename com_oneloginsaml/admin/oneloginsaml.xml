@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="component" version="3.3" method="upgrade">
+    <name>OneLogin SAML</name>
+    <author>OneLogin Inc.</author>
+    <creationDate>Arpil 2020</creationDate>
+    <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
+    <license>MIT</license>
+    <authorEmail>support@onelogin.com</authorEmail>
+    <authorUrl>onelogin.com</authorUrl>
+    <version>3.0.0</version>
+    <description>COM_ONELOGIN_XML_DESCRIPTION</description>
+    <install> 
+	<sql>
+	    <file driver="mysql" charset="utf8">sql/install.mysql.utf8.sql</file>
+	</sql>
+    </install>
+    <uninstall> 
+	<sql>
+	    <file driver="mysql" charset="utf8">sql/uninstall.mysql.utf8.sql</file>
+	</sql>
+    </uninstall>
+    <update> 
+	<schemas>
+	    <schemapath type="mysql">sql/updates/mysql</schemapath>
+	</schemas>
+    </update>
+    <administration>
+	<menu link='index.php?option=com_oneloginsaml'>OneLogin</menu>
+	<submenu>
+	    <menu
+		link="option=com_oneloginsaml&amp;view=config"
+		view="config"
+		img=""
+		alt=""
+	    >
+		com_onelogin_config
+	    </menu>
+	    <menu
+		link="option=com_oneloginsaml&amp;view=groups"
+		view="groups"
+		img=""
+		alt=""
+	    >
+		com_onelogin_groups
+	    </menu>
+	    <menu
+		link="option=com_oneloginsaml&amp;view=attributes"
+		view="attributes"
+		img=""
+		alt=""
+	    >
+		com_onelogin_attributes
+	    </menu>
+	</submenu>
+	<files folder="admin">
+	    <folder>controllers</folder>
+	    <filename>controllers/index.html</filename>
+	    <filename>controllers/attributes.php</filename>
+	    <filename>controllers/groups.php</filename>
+	    <filename>controllers/config.php</filename>
+	    <folder>language</folder>
+	    <folder>language/en-GB</folder>
+	    <filename>language/en-GB/en-GB.com_oneloginsaml.sys.ini</filename>
+	    <filename>language/en-GB/en-GB.com_oneloginsaml.ini</filename>
+	    <filename>language/en-GB/index.html</filename>
+	    <folder>language/en-US</folder>
+	    <filename>language/en-US/en-US.com_oneloginsaml.sys.ini</filename>
+	    <filename>language/en-US/en-US.com_oneloginsaml.ini</filename>
+	    <filename>language/en-US/index.html</filename>
+	    <filename>language/index.html</filename>
+	    <folder>models</folder>
+	    <folder>models/forms</folder>
+	    <filename>models/forms/attribute.xml</filename>
+	    <filename>models/forms/config.xml</filename>
+	    <filename>models/forms/group.xml</filename>
+	    <filename>models/forms/index.html</filename>
+	    <filename>models/attribute.php</filename>
+	    <filename>models/attributes.php</filename>
+	    <filename>models/groups.php</filename>
+	    <filename>models/group.php</filename>
+	    <filename>models/index.html</filename>
+	    <folder>sql</folder>
+	    <folder>sql/updates</folder>
+	    <folder>sql/updates/mysql</folder>
+	    <filename>sql/updates/index.html</filename>
+	    <filename>sql/updates/mysql/0.0.1.sql</filename>
+	    <filename>sql/updates/index.html</filename>
+	    <filename>sql/index.html</filename>
+	    <filename>sql/install.mysql.utf8.sql</filename>
+	    <filename>sql/uninstall.mysql.utf8.sql</filename>
+	    <folder>tables</folder>
+	    <filename>tables/attributes.php</filename>
+	    <filename>tables/config.php</filename>
+	    <filename>tables/groups.php</filename>
+	    <filename>tables/index.html</filename>
+	    <folder>views</folder>
+	    <folder>views/attribute</folder>
+	    <folder>views/attribute/tmpl</folder>
+	    <filename>views/attribute/tmpl/edit.php</filename>
+	    <filename>views/attribute/tmpl/index.html</filename>
+	    <filename>views/attribute/index.html</filename>
+	    <filename>views/attribute/view.html.php</filename>
+	    <folder>views/attributes</folder>
+	    <folder>views/attributes/tmpl</folder>
+	    <filename>views/attributes/tmpl/default.php</filename>
+	    <filename>views/attributes/tmpl/index.html</filename>
+	    <filename>views/attributes/view.html.php</filename>
+	    <filename>views/attributes/index.html</filename>
+	    <folder>views/config</folder>
+	    <folder> views/config/tmpl</folder>
+	    <filename>view/config/tmpl/default.php</filename>
+	    <filename>view/config/tmpl/index.html</filename>
+	    <filename>view/config/index.html</filename>
+	    <filename>view/config/view.html.php</filename>
+	    <folder>views/group</folder>
+	    <folder>views/group/tmpl</folder>
+	    <filename>views/group/tmpl/edit.php</filename>
+	    <filename>views/group/tmpl/index.html</filename>
+	    <filename>views/group/index.html</filename>
+	    <filename>views/group/view.html.php</filename>
+	    <folder>views/groups</folder>
+	    <folder>views/groups/tmpl</folder>
+	    <filename>views/groups/tmpl/default.php</filename>
+	    <filename>views/groups/tmpl/index.html</filename>
+	    <filename>views/groups/index.html</filename>
+	    <filename>views/groups/view.html.php</filename>
+	    <folder>views/groups</folder>
+	    <folder>views/oneloginsaml</folder>
+	    <folder>views/oneloginsaml/tmpl</folder>
+	    <filename>views/oneloginsaml/tmpl/index.html</filename>
+	    <filename>views/oneloginsaml/tmpl/default.php</filename>
+	    <filename>views/oneloginsaml/index.html</filename>
+	    <filename>views/oneloginsaml/view.html.php</filename>
+	    <filename>views/index.html</filename>
+	    <filename>controller.php</filename>
+	    <filename>index.html</filename>
+	    <filename>oneloginsaml.php</filename>
+	    <filename>oneloginsaml.xml</filename>
+	</files>
+	<languages folder="admin">
+	    <language tag="en-US">language/en-US/en-US.com_oneloginsaml.ini</language>
+	    <language tag="en-US">language/en-US/en-US.com_oneloginsaml.sys.ini</language>
+	    <language tag="en-GB">language/en-GB/en-GB.com_oneloginsaml.ini</language>
+	    <language tag="en-GB">language/en-GB/en-GB.com_oneloginsaml.sys.ini</language>
+	</languages>
+    </administration>
+</extension>
+
+
