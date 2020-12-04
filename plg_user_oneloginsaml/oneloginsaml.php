@@ -29,6 +29,9 @@ if (!defined('_JEXEC')) {
     // Instantiate the application.
     $app = JFactory::getApplication('site');
     $app->initialise();
+    JPluginHelper::importPlugin('system');
+    $dispatcher = JEventDispatcher::getInstance();
+    $dispatcher->trigger('onAfterInitialise');
     $login_url = JRoute::_('../../../index.php?option=com_users&view=login', true);
 
     //try to load the plugin
@@ -54,8 +57,7 @@ if (!defined('_JEXEC')) {
     $debug = $plgParams->get('onelogin_saml_advanced_settings_debug');
 
     //import the onelogin library and pass the settings
-    jimport('onelogin.init');
-    $saml_auth = onelogin_saml_instance($plgParams);
+    $saml_auth = new OneLogin_Saml2_Auth_Joomla($plgParams);
 
     //decide what direct function is required
     if (isset($_GET['sso'])) {
@@ -134,7 +136,7 @@ if (!defined('_JEXEC')) {
         }
 
         //try to load the user from the joomla table
-        $result = get_user_from_joomla($matcher, $username, $email);
+        $result = $saml_auth->get_user_from_joomla($matcher, $username, $email);
 
         if (!$result) {
             // User not found, check if could be created
@@ -149,7 +151,7 @@ if (!defined('_JEXEC')) {
                 $data['name'] = (isset($name) && !empty($name)) ? $name : $username;
                 $data['username'] = $username;
                 $data['email'] = $data['email1'] = $data['email2'] = JStringPunycode::emailToPunycode($email);
-                $data['password'] = $data['password1'] = $data['password2'] = JUserHelper::genRandomPassword();
+                $data['password'] = $data['password1'] = $data['password2'] = NULL;
 
                 // Get the model and validate the data.
                 jimport('joomla.application.component.model');
@@ -170,7 +172,7 @@ if (!defined('_JEXEC')) {
                     $app->redirect($login_url, $response->message, 'error');
                 }
 
-                $result = get_user_from_joomla($matcher, $username, $email);
+                $result = $saml_auth->get_user_from_joomla($matcher, $username, $email);
 
                 $user = JUser::getInstance($result->id);
 
@@ -179,7 +181,7 @@ if (!defined('_JEXEC')) {
                 $user->save();
 
 
-                $groups = get_mapped_groups($plgParams, $saml_groups);
+                $groups = $saml_auth->get_mapped_groups($plgParams, $saml_groups);
                 if (empty($groups)) {
                     $params = JComponentHelper::getParams('com_users');
                     // Get the default new user group, Registered if not specified.
@@ -218,7 +220,7 @@ if (!defined('_JEXEC')) {
                     $user->save();
                 }
 
-                $groups = get_mapped_groups($plgParams, $saml_groups);
+                $groups = $saml_auth->get_mapped_groups($plgParams, $saml_groups);
                 if (!empty($groups)) {
                     $user->set('groups', $groups);
                     $user->save();
@@ -286,8 +288,7 @@ if (!defined('_JEXEC')) {
                 $session = JFactory::getSession();
 
                 if ($session->get('saml_login')) {
-                    jimport('onelogin.init');
-                    $saml_auth = onelogin_saml_instance($this->params);
+                    $saml_auth = new OneLogin_Saml2_Auth_Joomla($this->params);
                     $saml_auth->logout();
                 }
             }
