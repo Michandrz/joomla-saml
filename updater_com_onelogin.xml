@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This is the Master updater file for the OneLogin PHP-SAML Joomla Repo DO NOT 
+UPDATE THIS FILE ON COMMITS WHILE DEVELOPING! Only update this file to 
+push a new release as an update to the general public.
+
+--> 
+<updates>
+    <update>
+        <name>OneLogin SAML Component</name>
+        <description>OneLogin SAML Library</description>
+        <element>com_oneloginsaml</element>
+        <type>Component</type>
+        <client>0</client>
+        <version>1.6.0</version>
+        <infourl title="Release Notes">https://github.com/onelogin/joomla-saml/blob/1.6.0/README.md</infourl>
+        <downloads>
+            <downloadurl type="full" format="zip">https://github.com/onelogin/joomla-saml/raw/1.6.0/com_onelogin.zip</downloadurl>
+        </downloads>
+        <tags>
+            <tag>stable</tag>
+        </tags>
+        <sha256>BA4E6F078DDBA67894E4F67857CA18738EC161129F124D2CA8DA02B8C8F55D5D</sha256>
+        <sha384>BC1B75E7D433AFA2863F6DEDF8BAC679F9B7F1E7491C22658F3DFA70EA8393F92FA712073E2132E17457D3F56EF19E03</sha384>
+        <sha512>3B88B5DFE6CE0B21A7C2E776E1FA46503B4CAB4673D0B4E48E5FE3ABEB8C578834CE5996280B390AFF66715F48B3535A93EB5457E910E17B9F83038B8E81EBED</sha512>
+        <maintainer>OneLogin</maintainer>
+        <maintainerurl>https://github.com/onelogin</maintainerurl>
+        <section></section>
+        <targetplatform name="joomla" version="3.*" />
+        <php_minimum>5.3.3</php_minimum>
+    </update>
+</updates>

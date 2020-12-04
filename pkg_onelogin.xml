@@ -16,6 +16,7 @@
     <description>OneLogin PHP SAML Joomla Implementation Package</description>
     <update>https://github.com/onelogin/joomla-saml</update>
     <files>
+        <file type="component" id="com_oneloginsaml">com_oneloginsaml.zip</file>
         <file type="library" id="onelogin" >onelogin.zip</file>
         <file type="plugin" id="plg_system_oneloginsaml" group="system">plg_system_onelogin.zip</file>
         <file type="plugin" id="plg_user_oneloginsaml" group="user">plg_user_oneloginsaml.zip</file>

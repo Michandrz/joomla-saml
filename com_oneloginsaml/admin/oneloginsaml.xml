@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="component" version="3.3" method="upgrade">
-    <name>OneLogin SAML</name>
+<extension type="component"  method="upgrade">
+    <name>com_oneloginsaml</name>
     <author>OneLogin Inc.</author>
     <creationDate>Arpil 2020</creationDate>
     <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
@@ -143,6 +143,9 @@
 	    <language tag="en-GB">language/en-GB/en-GB.com_oneloginsaml.ini</language>
 	    <language tag="en-GB">language/en-GB/en-GB.com_oneloginsaml.sys.ini</language>
 	</languages>
+    <updateservers>
+        <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>
+    </updateservers>
     </administration>
 </extension>
 
