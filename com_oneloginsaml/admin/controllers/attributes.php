@@ -14,7 +14,8 @@ defined('_JEXEC') or die('Restricted access');
  * Attribute CRUDL controller
  * @since 1.7.0
  */
-class oneloginsamlControllerAttributes extends \Joomla\CMS\MVC\Controller\BaseController {
+class oneloginsamlControllerAttributes extends \Joomla\CMS\MVC\Controller\BaseController 
+{
 
     /**
      * Process form and redirect
@@ -25,6 +26,15 @@ class oneloginsamlControllerAttributes extends \Joomla\CMS\MVC\Controller\BaseCo
         $model = $this->getModel('Attribute', 'oneloginsamlModel');
         $model->save($input);
         $msg = JText::_('COM_ONELOGIN_ATTRIBUTE_MAPPING_SAVED');
+        $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=attributes', false), $msg);
+    }
+    public function setMatcher() {
+        $input = $this->getInput('id', null, 'integer');
+        if($input != null) {
+            $model = $this->getModel('Attributes', 'oneloginsamlModel');
+            $model->setMatcher($input);
+            $msg = JText::_('COM_ONELOGIN_ATTRIBUTE_MATCHER_UPDATED');
+        }
         $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=attributes', false), $msg);
     }
 

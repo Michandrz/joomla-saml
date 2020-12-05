@@ -71,14 +71,6 @@
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </field>
-                <field name="onelogin_saml_account_matcher" type="radio"
-                                       label="PLG_ONELOGIN_SAML_ACCOUNT_MATCHER_LABEL"
-                                       description="PLG_ONELOGIN_SAML_ACCOUNT_MATCHER_DEC"
-                                       default="username"
-                >
-                    <option value="username">Username</option>
-                    <option value="mail">E-Mail</option>
-                </field>
             </fieldset>
             <fieldset name="attrs_mapping">
                 <field name="onelogin_saml_attr_mapping_name" type="text"

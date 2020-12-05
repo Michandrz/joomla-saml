@@ -10,30 +10,11 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-use Joomla\CMS\Factory;
-
 /**
  * Attribute CRUDI Model
  * @since 1.0
  */
 class oneloginsamlModelAttributes extends \Joomla\CMS\MVC\Model\ListModel {
-
-    /**
-     *  reference to the system's DB
-     * @var \JDatabase
-     * @since 1.7.0
-     */
-    protected $db;
-
-    /**
-     * 
-     * @param array $state An optional associative array of configuration settings.
-     * @since 1.7.0
-     */
-    public function __construct($state = null) {
-        $this->db = Factory::getDBO();
-        parent::__construct($state);
-    }
 
     /**
      * Deletes attributes
@@ -47,17 +28,35 @@ class oneloginsamlModelAttributes extends \Joomla\CMS\MVC\Model\ListModel {
             $table->delete($id);
         }
     }
+    
+    public function setMatcher($id) {
+        //unset all match columns
+        $query = $this->_db->getQuery(true);
+        $query->update('#__oneloginsaml_attrmap')
+                ->set($query->quoteName('match') . '= 0')
+                ->where($query->quoteName('match') . '!= 0');
+        $this->_db->setQuery($query);
+        $this->_db->execute();
+        
+        //set match column
+        $query = $this->_db->getQuery(true);
+        $query->update('#__oneloginsaml_attrmap')
+                ->set($query->quoteName('match') . ' = 1')
+                ->where($query->quoteName('id') . ' = ' . $id);
+        $this->_db->setQuery($query);
+        $this->_db->execute();
+    }
 
     /**
-     * Loads the Groups from the list
+     * Loads the Attributes from the list
      * @return array Array of attributeMapping objects
      * @since 1.7.0
      */
     protected function getListQuery() {
-        $query = $this->db->getQuery(true);
+        $query = $this->_db->getQuery(true);
         $query->select('*')
-                ->from($this->db->quoteName('#__oneloginsaml_attrmap'));
-        $this->db->setQuery($query);
+                ->from($this->_db->quoteName('#__oneloginsaml_attrmap'));
+        $this->_db->setQuery($query);
 
         return $query;
     }
