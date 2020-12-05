@@ -7,16 +7,30 @@
  */
 
 /**
- * Wrapper for the library interface to make things easier.
+ * Wrapper for the library interface to process Joomla style setting params
+ * into array for the library.
  *
- * @author Michael Andrzejewski<michael@jetskitechnologies.com>
+ * @since 1.6.0
  */
 class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
-
+    
+    /**
+     * Library wrapper to format Joomla Style params into an array for the Lib
+     * 
+     * @param \JRegistry $plgParams
+     * @since 1.6.0
+     */
     public function __construct($plgParams) {
         parent::__construct($this->formatSettings($plgParams));
     }
     
+    /**
+     * Fuction to turn JRegistry into an array.
+     * 
+     * @param \JRegistry $saml_params
+     * @return type
+     * @since 1.6.0
+     */
     protected function formatSettings($saml_params) {
         return array(
             'strict' => $saml_params->get('onelogin_saml_advanced_settings_strict_mode'),
@@ -72,9 +86,22 @@ class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
             ),
         );
     }
-
+    
+    /**
+     * 
+     * lookup users in the database
+     * 
+     * 
+     * @param string $matcher either "username" or "mail"
+     * @param string $username username
+     * @param string $email email
+     * @return \JDatabaseResult
+     * @since 1.6.0
+     * @deprecated since version 1.6.0
+     * @todo Uses legacy Joomla DBO functions.
+     * @todo move to model
+     */
     function get_user_from_joomla($matcher, $username, $email) {
-        // Get a database object
         $db = JFactory::getDbo();
 
         switch ($matcher) {
@@ -97,7 +124,13 @@ class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
         $result = $db->loadObject();
         return $result;
     }
-
+    
+/**
+ * 
+ * @param \JRegistry $saml_params Plugin params
+ * @param array $saml_groups listing of groups recieved from the IDP
+ * @return type
+ */
     function get_mapped_groups($saml_params, $saml_groups) {
         $groups = array();
 

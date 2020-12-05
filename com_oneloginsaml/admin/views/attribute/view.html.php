@@ -6,22 +6,32 @@
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author Michael Andrzejewski
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
-
-class oneloginsamlViewAttribute extends JViewLegacy
+/**
+ * View of an individual item
+ */
+class oneloginsamlViewAttribute extends \Joomla\CMS\MVC\View\HtmlView
 {
 
     /**
      * View form
      *
-     * @var         form
+     * @var \Joomla\Form\Form
+     * @since 1.7.0
      */
     protected $form = null;
+    
+    /**
+     * Item to edit
+     * @var \Joomla\CMS\Object\CMSObject
+     * @since 1.7.0
+     */
+    protected $item = null;
 
     /**
-     * Display the Hello World view
+     * Display the Attribute view
      *
      * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
      *

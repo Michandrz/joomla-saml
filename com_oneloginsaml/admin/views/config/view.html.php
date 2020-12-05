@@ -6,20 +6,38 @@
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author Michael Andrzejewski
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
 
-class oneloginsamlViewConfig extends JViewLegacy
+/**
+ * View for Onelogin Configuration
+ */
+class oneloginsamlViewConfig extends \Joomla\CMS\MVC\View\HtmlView
 {
 
     /**
      * View form
      *
-     * @var         form
+     * @var \Joomla\Form\Form
+     * @since 1.7.0
      */
     protected $form = null;
     
+    /**
+     * Item to edit
+     * @var \Joomla\CMS\Object\CMSObject
+     * @since 1.7.0
+     */
+    protected $item = null;
+    
+    /**
+     * Loads form, displays view, adds toolbar
+     * 
+     * @param type $tpl
+     * @return void|boolean void on success, false on failure
+     * @since 1.7.0
+     */
     public function display($tpl = null)
     {
 	// Get the Data
@@ -38,7 +56,7 @@ class oneloginsamlViewConfig extends JViewLegacy
 	$this->addToolBar();
 
 	// Display the template
-	parent::display($tpl);
+	return parent::display($tpl);
     }
 
     /**
@@ -46,7 +64,7 @@ class oneloginsamlViewConfig extends JViewLegacy
      *
      * @return  void
      *
-     * @since   1.6
+     * @since   1.7.0
      */
     protected function addToolBar()
     {

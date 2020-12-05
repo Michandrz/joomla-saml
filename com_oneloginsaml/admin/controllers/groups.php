@@ -6,12 +6,19 @@
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author Michael Andrzejewski
+ * @author Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
-
-class oneloginsamlControllerGroups extends JControllerLegacy
+/**
+ * Groups CRUDL controller
+ * @since 1.7.0
+ */
+class oneloginsamlControllerGroups extends \Joomla\CMS\MVC\Controller\BaseController
 {
+    /**
+     * Process form and redirect
+     * @since 1.7.0
+     */
     public function save() {
 	$input = $this->getInput('jform');
 	$model	 = $this->getModel('Group', 'oneloginsamlModel');
@@ -19,15 +26,26 @@ class oneloginsamlControllerGroups extends JControllerLegacy
 	$msg = JText::_('COM_ONELOGIN_GROUP_MAPPING_SAVED');
 	$this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=groups', false), $msg);
     }
+    /**
+     * Discard changes and redirect
+     * @since 1.7.0
+     */
     public function cancel() {
 	$this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=groups', false));
     }
-
+    /**
+     * redirect to blank edit form
+     * @since 1.7.0
+     */
     public function newButton()
     {
 	$this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=group&layout=edit&id=0', false));
     }
 
+    /**
+     * redirect to edit form
+     * @since 1.7.0
+     */
     public function editButton()
     {
 	$input	 = $this->getInput('cid');
@@ -37,7 +55,7 @@ class oneloginsamlControllerGroups extends JControllerLegacy
 
     /**
      * Deletes a record provided by JINPUT and redirects to the view.
-     * 
+     * @since 1.7.0
      */
     public function delete()
     {
@@ -65,6 +83,7 @@ class oneloginsamlControllerGroups extends JControllerLegacy
      * @param mixed $defaultValue Default, if no value
      * @param string $type Filter to apply 
      * @return mixed
+     * @since 1.7.0
      */
     protected function getInput($key, $defaultValue = array(), $type = 'array')
     {

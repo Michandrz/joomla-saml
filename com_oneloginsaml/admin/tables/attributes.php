@@ -11,13 +11,17 @@
 // No direct access
 defined('_JEXEC') or die('Restricted access');
 
-
+/**
+ * Table class for the attributes
+ * @since 1.7.0
+ */
 class oneloginsamlTableAttributes extends JTable
 {
 	/**
 	 * Constructor
 	 *
 	 * @param   JDatabaseDriver  &$db  A database connector object
+         * @since 1.7.0
 	 */
 	function __construct(&$db)
 	{

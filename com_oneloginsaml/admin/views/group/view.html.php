@@ -6,20 +6,40 @@
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author Michael Andrzejewski
+ * @author Michael Andrzejewski <michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
 
-class oneloginsamlViewGroup extends JViewLegacy
+/**
+ * View of Individual Group 
+ * @since 1.7.0
+ */
+class oneloginsamlViewGroup extends \Joomla\CMS\MVC\View\HtmlView
 {
 
     /**
      * View form
      *
-     * @var         form
+     * @var \Joomla\Form\Form
+     * @since 1.7.0
      */
     protected $form = null;
     
+    /**
+     * Item to edit
+     * @var \Joomla\CMS\Object\CMSObject
+     * @since 1.7.0
+     */
+    protected $item = null;
+    
+    /**
+     * Pulls in forms and items, adds the admin tool bar
+     *
+     * @param string $tpl template to load
+     * @return void|boolean void on succsess, false on failure 
+     * 
+     * @since 1.7.0
+     */
     public function display($tpl = null)
     {
 	// Get the Data
@@ -43,11 +63,11 @@ class oneloginsamlViewGroup extends JViewLegacy
     }
 
     /**
-     * Add the page title and toolbar.
+     * Add the page title and toolbar. Hides main admin menu
      *
      * @return  void
      *
-     * @since   1.6
+     * @since   1.7.0
      */
     protected function addToolBar()
     {
