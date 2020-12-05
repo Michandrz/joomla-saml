@@ -33,6 +33,19 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
     public function getTable($type = 'Config', $prefix = 'oneloginsamlTable', $config = array()) {
         return Table::getInstance($type, $prefix, $config);
     }
+    
+    /**
+     *  Returns the current Plugin Params
+     * @return Registry;
+     */
+    public function getPluginParams() {
+        
+        $oneLoginPlugin = PluginHelper::getPlugin('user', 'oneloginsaml');
+        $plgParams = new Registry();
+        $plgParams->loadString($oneLoginPlugin->params);
+        
+        return $plgParams;
+    }
 
     /**
      * Loads the form data and returns it in a field=>value array
@@ -40,13 +53,10 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
      * @since 1.7.0
      */
     public function loadFormData() {
-        $oneLoginPlugin = PluginHelper::getPlugin('user', 'oneloginsaml');
-        $plgParams = new Registry();
-        $plgParams->loadString($oneLoginPlugin->params);
 
         $return = array();
 
-        foreach ($plgParams->toArray() as $key => $value) {
+        foreach ($this->getPluginParams()->toArray() as $key => $value) {
             $return[$key] = $value;
         }
         return $return;
@@ -81,9 +91,7 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
      * @param array $data data in feild=>value format
      */
     public function save($data) {
-        $oneLoginPlugin = PluginHelper::getPlugin('user', 'oneloginsaml');
-        $plgParams = new Registry();
-        $plgParams->loadString($oneLoginPlugin->params);
+        $plgParams = $this->getPluginParams();
 
         foreach ($data as $key => $value) {
             $plgParams->set($key, $value);
