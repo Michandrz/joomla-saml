@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
-    <fieldset>
+    <fieldset name="idp">
 	<field 
 	    name="onelogin_saml_idp_entityid" 
 	    type="text"
@@ -34,7 +34,7 @@
 	    default=""
 	/>
     </fieldset>
-    <fieldset>
+    <fieldset name="basic">
 	<field 
 	    name="onelogin_saml_autocreate" 
 	    type="radio"
@@ -76,7 +76,7 @@
 	    <option value="mail">E-Mail</option>
 	</field>
     </fieldset>
-    <fieldset>
+    <fieldset name="Advanced_Plugin_Settings">
 	<field 
 	    name="onelogin_saml_advanced_settings_debug" 
 	    type="radio"

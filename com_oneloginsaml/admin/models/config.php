@@ -13,13 +13,13 @@ defined('_JEXEC') or die('Restricted access');
 use \Joomla\CMS\Table\Table;
 use \Joomla\CMS\Plugin\PluginHelper;
 use \Joomla\Registry\Registry;
+use \Joomla\CMS\Factory;
 
 /**
  * Config CRDUI Model
  * @since 1.7.0
  */
 class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
-
     /**
      * 
      * Load the Table
@@ -93,8 +93,9 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
         $query->update('#__extensions')
                 ->set($query->quoteName('params') . '=' . $query->quote($plgParams->toString()))
                 ->where($query->quoteName('element') . '=' . $query->quote('oneloginsaml'));
-        $query->setQuery($query);
+        $this->_db->setQuery($query);
         $this->_db->execute();
+        
     }
 
 }
