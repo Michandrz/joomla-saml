@@ -35,7 +35,7 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
     }
 
     /**
-     * Loads the form data and returns it in a feild=>value array
+     * Loads the form data and returns it in a field=>value array
      * @return array Form data
      * @since 1.7.0
      */
@@ -95,7 +95,6 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
                 ->where($query->quoteName('element') . '=' . $query->quote('oneloginsaml'));
         $this->_db->setQuery($query);
         $this->_db->execute();
-        
     }
 
 }
