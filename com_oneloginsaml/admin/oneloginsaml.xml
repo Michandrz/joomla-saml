@@ -107,11 +107,11 @@
 	    <filename>views/attributes/view.html.php</filename>
 	    <filename>views/attributes/index.html</filename>
 	    <folder>views/config</folder>
-	    <folder> views/config/tmpl</folder>
-	    <filename>view/config/tmpl/default.php</filename>
-	    <filename>view/config/tmpl/index.html</filename>
-	    <filename>view/config/index.html</filename>
-	    <filename>view/config/view.html.php</filename>
+	    <folder>views/config/tmpl</folder>
+	    <filename>views/config/tmpl/default.php</filename>
+	    <filename>views/config/tmpl/index.html</filename>
+	    <filename>views/config/index.html</filename>
+	    <filename>views/config/view.html.php</filename>
 	    <folder>views/group</folder>
 	    <folder>views/group/tmpl</folder>
 	    <filename>views/group/tmpl/edit.php</filename>

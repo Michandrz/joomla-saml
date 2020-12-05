@@ -6,20 +6,43 @@
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author Michael Andrzejewski
+ * @author Michael Andrzejewski <michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
 
-class oneloginsamlViewGroup extends JViewLegacy
+use \Joomla\CMS\Toolbar\ToolbarHelper;
+use \Joomla\CMS\Factory;
+use \Joomla\CMS\Language\Text;
+/**
+ * View of Individual Group 
+ * @since 1.7.0
+ */
+class oneloginsamlViewGroup extends \Joomla\CMS\MVC\View\HtmlView
 {
 
     /**
      * View form
      *
-     * @var         form
+     * @var \Joomla\CMS\Form\Form
+     * @since 1.7.0
      */
     protected $form = null;
     
+    /**
+     * Item to edit
+     * @var \Joomla\CMS\Object\CMSObject
+     * @since 1.7.0
+     */
+    protected $item = null;
+    
+    /**
+     * Pulls in forms and items, adds the admin tool bar
+     *
+     * @param string $tpl template to load
+     * @return void|boolean void on succsess, false on failure 
+     * @todo Remove JError as class is dpercated as of J4.0
+     * @since 1.7.0
+     */
     public function display($tpl = null)
     {
 	// Get the Data
@@ -43,15 +66,15 @@ class oneloginsamlViewGroup extends JViewLegacy
     }
 
     /**
-     * Add the page title and toolbar.
+     * Add the page title and toolbar. Hides main admin menu
      *
      * @return  void
      *
-     * @since   1.6
+     * @since   1.7.0
      */
     protected function addToolBar()
     {
-	$input = JFactory::getApplication()->input;
+	$input = Factory::getApplication()->input;
 
 	// Hide Joomla Administrator Main menu
 	$input->set('hidemainmenu', true);
@@ -60,15 +83,15 @@ class oneloginsamlViewGroup extends JViewLegacy
 
 	if ($isNew)
 	{
-	    $title = JText::_('COM_ONELOGIN_MANAGER_GROUP_NEW');
+	    $title = Text::_('COM_ONELOGIN_MANAGER_GROUP_NEW');
 	} else
 	{
-	    $title = JText::_('COM_ONELOGIN_MANAGER_GROUP_EDIT');
+	    $title = Text::_('COM_ONELOGIN_MANAGER_GROUP_EDIT');
 	}
 
-	JToolbarHelper::title($title, 'oneloginsaml');
-	JToolbarHelper::save('groups.save');
-	JToolbarHelper::cancel(
+	ToolbarHelper::title($title, 'oneloginsaml');
+	ToolbarHelper::save('groups.save');
+	ToolbarHelper::cancel(
 		'groups.cancel', $isNew ? 'JTOOLBAR_CANCEL' : 'JTOOLBAR_CLOSE'
 	);
     }
