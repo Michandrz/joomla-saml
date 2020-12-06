@@ -52,6 +52,9 @@
 		com_onelogin_attributes
 	    </menu>
 	</submenu>
+        <files>
+            
+        </files>
 	<files folder="admin">
 	    <folder>controllers</folder>
 	    <filename>controllers/index.html</filename>

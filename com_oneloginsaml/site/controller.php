@@ -13,7 +13,6 @@ defined('_JEXEC') or die;
 use \Joomla\CMS\Plugin\PluginHelper;
 use \Joomla\Registry\Registry;
 use \Joomla\CMS\Factory;
-use \Joomla\CMS\Uri\Uri;
 
 /**
  * Component main controller
@@ -93,5 +92,28 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
         
         return $this;
     
+    }
+    
+    /**
+     * echo the metadata
+     * 
+     * @return $this
+     * @throws OneLogin_Saml2_Error
+     */
+    public function getMetadata() {
+        $settings = $this->_oneloginPhpSaml->getSettings();
+        $errors = $settings->validateMetadata($settings->getSPMetadata());
+        if(empty($errors)) {
+            $document = Factory::getDocument();
+            $document->setMimeEncoding('text/xml');
+            echo $settings->getSPMetadata();
+        } else {
+            throw new OneLogin_Saml2_Error(
+                    'Invalid SP metadata: ' . implode(', ', $errors),
+                    OneLogin_Saml2_Error::METADATA_SP_INVALID
+            );
+        }
+        
+        return $this;
     }
 }
