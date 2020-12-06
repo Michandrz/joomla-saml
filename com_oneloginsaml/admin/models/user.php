@@ -9,6 +9,7 @@ use \Joomla\CMS\User\User;
 use \Joomla\CMS\User\UserHelper;
 use \Joomla\CMS\Plugin\PluginHelper;
 use \Joomla\CMS\Component\ComponentHelper;
+use \Joomla\CMS\Factory;
 /**
  * Model to handle various user/database interactions
  */
@@ -44,16 +45,17 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
         $query = $this->_db->getQuery(true);
         $query->select('`local`, `idp`')->from('#__oneloginsaml_attrmap');
         $this->_db->setQuery($query);
-        $attrmap = $this->_db->loadAssocList('local', 'idp');
+        $attrmap = $this->_db->loadAssocList('idp', 'local');
         
         //Let the user plugins deal with where the data goes
-        PluginHelper::getPlugin('user');
-        $dispatcher = JEventDispatcher::getInstance();
+        PluginHelper::importPlugin('user');
+        $app = Factory::getApplication();
+        //$dispatcher = JEventDispatcher::getInstance();
         
         foreach($saml_attrs as $samlattributename => $samlattribute) {
-            if(in_array($samlattributename, $attrmap)) {
-                $local = array_search($samlattributename, $attrmap);
-                $dispatcher->trigger('onUserUpdateInfo', array($user, $local, $samlattribute[0]));
+            if(array_key_exists($samlattributename, $attrmap)) {
+                $app->triggerEvent('onUserUpdateInfo', array($user, $attrmap[$samlattributename], $samlattribute[0]));
+                //$dispatcher->trigger('onUserUpdateInfo', array($user, $attrmap[$samlattributename], $samlattribute[0]));
             }
         }
     }
@@ -152,6 +154,15 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
             throw new Exception("More than one User was found unable to complete login", 500);
         }
         return new User($this->_db->loadResult());
+    }
+    /**
+     * Creates the user bypassing verification coming from the IDP
+     * @param type $saml_attrs
+     * @return boolean|User User Object on success, false on failure
+     * @todo wite this function
+     */
+    public function createUser($saml_attrs) {
+        
     }
     
 }

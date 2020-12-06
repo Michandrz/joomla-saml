@@ -38,10 +38,10 @@ class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
             'sp' => array(
                 'entityId' => ($saml_params->get('onelogin_saml_advanced_settings_sp_entity_id') ? $saml_params->get('onelogin_saml_advanced_settings_sp_entity_id') : 'php-saml'),
                 'assertionConsumerService' => array(
-                    'url' => JURI::root() . 'oneloginsaml.php?acs',
+                    'url' => JURI::root() . 'index.php?option=com_oneloginsaml&task=samlLoginFinsh',
                 ),
                 'singleLogoutService' => array(
-                    'url' => JURI::root() . 'oneloginsaml.php?sls',
+                    'url' => JURI::root() . 'index.php?option=com_oneloginsaml&task=samlLogoutFinish',
                 ),
                 'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
                 'x509cert' => $saml_params->get('onelogin_saml_advanced_settings_sp_x509cert'),
@@ -86,79 +86,4 @@ class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
             ),
         );
     }
-    
-    /**
-     * 
-     * lookup users in the database
-     * 
-     * 
-     * @param string $matcher either "username" or "mail"
-     * @param string $username username
-     * @param string $email email
-     * @return \JDatabaseResult
-     * @since 1.6.0
-     * @deprecated since version 1.6.0
-     * @todo Uses legacy Joomla DBO functions.
-     * @todo move to model
-     */
-    function get_user_from_joomla($matcher, $username, $email) {
-        $db = JFactory::getDbo();
-
-        switch ($matcher) {
-            case 'mail':
-                $query = $db->getQuery(true)
-                        ->select('id')
-                        ->from('#__users')
-                        ->where('email=' . $db->quote($email));
-                break;
-            case 'username':
-            default:
-                $query = $db->getQuery(true)
-                        ->select('id')
-                        ->from('#__users')
-                        ->where('username=' . $db->quote($username));
-                break;
-        }
-
-        $db->setQuery($query);
-        $result = $db->loadObject();
-        return $result;
-    }
-    
-/**
- * 
- * @param \JRegistry $saml_params Plugin params
- * @param array $saml_groups listing of groups recieved from the IDP
- * @return type
- */
-    function get_mapped_groups($saml_params, $saml_groups) {
-        $groups = array();
-
-        if (!empty($saml_groups)) {
-            $saml_mapped_groups = array();
-            $i = 1;
-            while ($i < 21) {
-                $saml_mapped_groups_value = $saml_params->get('group' . $i . '_map');
-                $saml_mapped_groups[$i] = explode(',', $saml_mapped_groups_value);
-                $i++;
-            }
-        }
-
-        foreach ($saml_groups as $saml_group) {
-            if (!empty($saml_group)) {
-                $i = 0;
-                $found = false;
-                while ($i < 21 && !$found) {
-                    if (!empty($saml_mapped_groups[$i]) && in_array($saml_group, $saml_mapped_groups[$i])) {
-                        $groups[] = $saml_params->get('group' . $i);
-                        $found = true;
-                    }
-                    $i++;
-                }
-            }
-        }
-
-        return array_unique($groups);
-    }
-
 }

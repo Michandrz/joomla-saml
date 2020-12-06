@@ -66,121 +66,9 @@ if (!defined('_JEXEC')) {
         $saml_auth->login();
     } else if (isset($_GET['slo'])) {
         //logout required redirect to the idp
-        $saml_auth->logout();
+        $saml_auth->logout(); 
     } else if (isset($_GET['acs'])) {
-        //IDP response
-        $saml_auth->processResponse();
-
-        //import the user authentication class
-        jimport('joomla.user.authentication');
-        $authenticate = JAuthentication::getInstance();
-        $response = new JAuthenticationResponse();
-
-        //check to see if the user is authenticated to the idp
-        if (!$saml_auth->isAuthenticated()) {
-            //user is not generate an error and redirect
-            $msg_error = 'NO_AUTHENTICATED';
-            $errors = $saml_auth->getErrors();
-
-            if (!empty($errors) && $debug) {
-                $msg_error .= '<br>' . implode(', ', $errors);
-            }
-            $response->status = JAuthentication::STATUS_FAILURE;
-            $response->message = $msg_error;
-            $app->redirect($login_url, $response->message, 'error');
-        }
-
-        //Load IDP attrs
-        $attrs = $saml_auth->getAttributes();
-        
-        //Load the the OneloginsamlModelUser
-        if (!defined('JPATH_COMPONENT')) {
-            define('JPATH_COMPONENT', JPATH_BASE . '/components/');
-        }
-        JModelLegacy::addIncludePath(JPATH_BASE . '/administrator/components/com_oneloginsaml/models');
-        /**
-         * @var  oneloginsamlModelUser
-         */
-        $oneloginUserModel = JModelLegacy::getInstance('User', 'oneloginsamlModel');
-        
-        //populate the matcher
-        $oneloginUserModel->setMatcher($attrs);
-        
-        //try to load the user
-        $loadedUser = $oneloginUserModel->getUser();
-        
-
-        if (!is_a($loadedUser, "\Joomla\CMS\User\User")) {
-            // User not found, check if could be created
-            $autocreate = $plgParams->get('onelogin_saml_autocreate');
-
-            if ($autocreate) {
-                if (empty($username)) {
-                    $username = $email;
-                }
-
-                // user data
-                $data['name'] = (isset($name) && !empty($name)) ? $name : $username;
-                $data['username'] = $username;
-                $data['email'] = $data['email1'] = $data['email2'] = JStringPunycode::emailToPunycode($email);
-                $data['password'] = $data['password1'] = $data['password2'] = NULL;
-
-                // Get the model and validate the data.
-                jimport('joomla.application.component.model');
-
-                JModelLegacy::addIncludePath(JPATH_BASE . '/components/com_users/models');
-                $model = JModelLegacy::getInstance('Registration', 'UsersModel');
-
-                $return = $model->register($data);
-
-                if ($return === false) {
-                    $errors = $model->getErrors();
-                    $response->status = JAuthentication::STATUS_FAILURE;
-                    $response->message = 'USER NOT EXISTS AND FAILED THE CREATION PROCESS';
-                    $app->redirect($login_url, $response->message, 'error');
-                }
-                
-                $loadedUser = $oneloginUserModel->getUser();
-
-                $loadedUser->set('block', '0');
-                $loadedUser->set('activation', '');
-                $loadedUser->save();
-
-                $oneloginUserModel->processAttributes($loadedUser, $attrs);
-                $oneloginUserModel->setGroups($loadedUser, $attrs);
-
-                $response->status == JAuthentication::STATUS_SUCCESS;
-                $session->set('user', $loadedUser);
-
-                // SSO SAML Login flag
-                $session->set('saml_login', 1);
-
-                $app->redirect($login_url, "Welcome $loadedUser->username", 'message');
-            } else {
-                //User didn't exist and we're not allowed to create
-                //generate error and redirect
-                $response->status = JAuthentication::STATUS_FAILURE;
-                $response->message = 'USER DOES NOT EXIST AND NOT ALLOWED TO CREATE';
-                $app->redirect($login_url, $response->message, 'error');
-            }
-        } else {
-            
-            // check if user data should be update
-            $autoupdate = $plgParams->get('onelogin_saml_updateuser');
-
-            if ($autoupdate) {
-                $oneloginUserModel->processAttributes($loadedUser, $attrs);
-                $oneloginUserModel->setGroups($loadedUser, $attrs);
-            }
-            //we're done authenticating, set the user and session and redirect
-            $response->status == JAuthentication::STATUS_SUCCESS;
-            $session->set('user', $loadedUser);
-
-            // SSO SAML Login flag
-            $session->set('saml_login', 1);
-
-            $app->redirect($login_url, "Welcome $loadedUser->username", 'message');
-        }
+        //Moved to Component
     } else if (isset($_GET['sls'])) {
         // logout 
         $saml_auth->processSLO();
@@ -214,7 +102,7 @@ if (!defined('_JEXEC')) {
     // We can't use the normal login process. We don't require user to click on Login
     // Joomla form providing credentials
 
-    class PlgUserOneloginsaml extends JPlugin {
+    class PlgUserOneloginsaml extends \Joomla\CMS\Plugin\CMSPlugin {
         /*
           public function onUserAuthenticate($credentials, $options, &$response)
           {
