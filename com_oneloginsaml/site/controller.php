@@ -41,7 +41,7 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
 
         
         //make the Library easily accessable
-        $oneLoginPlugin = PluginHelper::getPlugin('user', 'oneloginsaml');
+        $oneLoginPlugin = PluginHelper::getPlugin('system', 'oneloginsaml');
         $plgParams = new Registry($oneLoginPlugin->params);
         $this->_oneloginPhpSaml = new OneLogin_Saml2_Auth_Joomla($plgParams);
 
