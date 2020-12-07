@@ -48,3 +48,5 @@ CREATE VIEW IF NOT EXISTS `lyqp8_oneloginsaml_groupmapview` AS
 	`lyqp8_oneloginsaml_groupmap`.`idp` as `idp`
     FROM `lyqp8_oneloginsaml_groupmap`
     JOIN `lyqp8_usergroups` ON  `lyqp8_oneloginsaml_groupmap`.`local` = `lyqp8_usergroups`.`id`;
+
+INSERT INTO `#__oneloginsaml_attrmap` (`local`,`idp`,`match`) VALUES ('Name','',0) ('Username','',0) ('Email','',1) ('Groups','',0);

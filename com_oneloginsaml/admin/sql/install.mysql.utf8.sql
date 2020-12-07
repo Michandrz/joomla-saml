@@ -42,3 +42,5 @@ CREATE VIEW `#__oneloginsaml_groupmapview` AS
 	`#__oneloginsaml_groupmap`.`idp` as `idp`
     FROM `#__oneloginsaml_groupmap`
     JOIN `#__usergroups` ON  `#__oneloginsaml_groupmap`.`local` = `#__usergroups`.`id`;
+
+INSERT INTO `#__oneloginsaml_attrmap` (`local`,`idp`,`match`) VALUES ('Name','',0) ('Username','',0) ('Email','',1) ('Groups','',0);
