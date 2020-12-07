@@ -28,6 +28,7 @@
         <file>controller.php</file>
         <file>index.html</file>
         <file>oneloginsaml.php</file>
+        <file>controller.xml.php</file>
     </files>
     <administration>
         <menu link='index.php?option=com_oneloginsaml'>OneLogin</menu>
@@ -140,7 +141,6 @@
             <filename>controller.php</filename>
             <filename>index.html</filename>
             <filename>oneloginsaml.php</filename>
-            <filename>oneloginsaml.xml</filename>
         </files>
         <languages folder="admin">
             <language tag="en-US">language/en-US/en-US.com_oneloginsaml.ini</language>
@@ -148,10 +148,10 @@
             <language tag="en-GB">language/en-GB/en-GB.com_oneloginsaml.ini</language>
             <language tag="en-GB">language/en-GB/en-GB.com_oneloginsaml.sys.ini</language>
         </languages>
-        <updateservers>
-            <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>
-        </updateservers>
     </administration>
+    <updateservers>
+        <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>
+    </updateservers>
 </extension>
 
 
