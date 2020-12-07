@@ -1,8 +1,6 @@
-<?xml version="1.0" encoding="utf-8"?>
-<extension type="library" method="upgrade">
-    <name>OneLogin SAML Library</name>
+<extension type="plugin" group="authtentication" method="upgrade">
+    <name>plg_authentication_oneloginsaml</name>
     <author>OneLogin INC.</author>
-    <libraryname>onelogin</libraryname>
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
     <creationDate>January 2019</creationDate>
@@ -10,11 +8,8 @@
     <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
     <license>MIT</license>
     <files>
-        <filename>loader.php</filename>
-        <filename>onelogin.xml</filename>
-        <folder>certs</folder>
-        <folder>extlib</folder>
-        <folder>lib</folder>
+        <filename plugin="oneloginsaml">oneloginsaml.php</filename>
+        <filename>index.html</filename>
     </files>
     <updateservers>
         <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>

@@ -12,10 +12,11 @@
  *  @package     OneLogin PHP-SAML Library
  *  @subpackage  OneLogin.PHP-SAML.JoomlaLoader
  */
-class plgSystemOnelogin extends JPlugin {
+class plgSystemOneloginsaml extends JPlugin {
 
     /**
      * Register the library into the Joomla application
+     * @todo code to check for saml auth expiry
      */
     public function onAfterInitialise() {
         JLoader::register('XMLSecurityKey',                     JPATH_LIBRARIES . '/onelogin/extlib/xmlseclibs/xmlseclibs.php');

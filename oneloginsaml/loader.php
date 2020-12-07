@@ -38,10 +38,10 @@ class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
             'sp' => array(
                 'entityId' => ($saml_params->get('onelogin_saml_advanced_settings_sp_entity_id') ? $saml_params->get('onelogin_saml_advanced_settings_sp_entity_id') : 'php-saml'),
                 'assertionConsumerService' => array(
-                    'url' => JURI::root() . 'index.php?option=com_oneloginsaml&task=samlLoginFinsh',
+                    'url' => JURI::root() . 'index.php?option=com_oneloginsaml&task=acs',
                 ),
                 'singleLogoutService' => array(
-                    'url' => JURI::root() . 'index.php?option=com_oneloginsaml&task=samlLogoutFinish',
+                    'url' => JURI::root() . 'index.php?option=com_oneloginsaml&task=sls',
                 ),
                 'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
                 'x509cert' => $saml_params->get('onelogin_saml_advanced_settings_sp_x509cert'),

@@ -39,6 +39,7 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
      */
     public function __construct($config = array()) {
 
+        
         //make the Library easily accessable
         $oneLoginPlugin = PluginHelper::getPlugin('user', 'oneloginsaml');
         $plgParams = new Registry($oneLoginPlugin->params);
@@ -46,7 +47,6 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
 
         parent::__construct($config);
     }
-
     /**
      * Redirect to IDP for Login
      * @param string $redirect Base 64 encoded URL
@@ -58,7 +58,7 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
         return $this;
     }
     
-    public function samlFinishLogin($redirect = null) {
+    public function acs($redirect = null) {
         
         $this->_oneloginPhpSaml->processResponse();
        
@@ -86,34 +86,11 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
      * Redirect to IDP for Logout
      * @param string $redirect Base 64 encoded URL
      */
-    public function samlLogout($redirect = null) {
+    public function sls($redirect = null) {
 
         $this->setRedirect($this->_oneloginPhpSaml->login(null, array(), false, false, true));
         
         return $this;
     
-    }
-    
-    /**
-     * echo the metadata
-     * 
-     * @return $this
-     * @throws OneLogin_Saml2_Error
-     */
-    public function getMetadata() {
-        $settings = $this->_oneloginPhpSaml->getSettings();
-        $errors = $settings->validateMetadata($settings->getSPMetadata());
-        if(empty($errors)) {
-            $document = Factory::getDocument();
-            $document->setMimeEncoding('text/xml');
-            echo $settings->getSPMetadata();
-        } else {
-            throw new OneLogin_Saml2_Error(
-                    'Invalid SP metadata: ' . implode(', ', $errors),
-                    OneLogin_Saml2_Error::METADATA_SP_INVALID
-            );
-        }
-        
-        return $this;
     }
 }

@@ -40,7 +40,7 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
      */
     public function getPluginParams() {
         
-        $oneLoginPlugin = PluginHelper::getPlugin('user', 'oneloginsaml');
+        $oneLoginPlugin = PluginHelper::getPlugin('system', 'oneloginsaml');
         $plgParams = new Registry();
         $plgParams->loadString($oneLoginPlugin->params);
         

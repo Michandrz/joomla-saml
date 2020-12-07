@@ -28,16 +28,10 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
         //if the password is not the library fail
         if (is_a($credentials['password'], 'OneLogin_Saml2_Auth')) {
             $saml_lib = $credentials['password'];
-
-            //load our params
-            $oneLoginPlugin = JPluginHelper::getPlugin('user', 'oneloginsaml');
-            if (!$oneLoginPlugin) {
-                throw new Exception("Onelogin SAML Plugin not active");
-            } $plgParams = new JRegistry();
-            if ($oneLoginPlugin && isset($oneLoginPlugin->params)) {
-                $plgParams->loadString($oneLoginPlugin->params);
+            if ($oneLoginPlugin && isset($this->params)) {
+                $this->params->loadString($$this->params);
             }
-            $debug = $plgParams->get('onelogin_saml_advanced_settings_debug');
+            $debug = $this->params->get('onelogin_saml_advanced_settings_debug');
 
             if ($saml_lib->isAuthenticated()) {
                 $attrs = $saml_lib->getAttributes();
@@ -54,7 +48,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                 if (!is_a($loadedUser, "\Joomla\CMS\User\User")) {
                     //user exists
                     $session = Factory::getSession();
-                    if ($plgParams->get('onelogin_saml_updateuser', false, 'boolean')) {
+                    if ($this->params->get('onelogin_saml_updateuser', false, 'boolean')) {
                             $oneloginUserModel->processAttributes($loadedUser, $attrs);
                             $oneloginUserModel->setGroups($loadedUser, $attrs);
                         }
@@ -72,7 +66,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                         $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
                         $session->set('saml_login', 1);
                         
-                    } elseif ($plgParams->get('onelogin_saml_autocreate', false, 'boolean')) {
+                    } elseif ($this->params->get('onelogin_saml_autocreate', false, 'boolean')) {
                         //user doesn't exist, but we can create it
                         $loadedUser = $oneloginUserModel->createUser($attrs);
                         $response->email = $loadedUser->email;
