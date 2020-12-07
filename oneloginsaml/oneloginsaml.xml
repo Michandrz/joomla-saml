@@ -2,7 +2,7 @@
 <extension type="library" method="upgrade">
     <name>OneLogin SAML Library</name>
     <author>OneLogin INC.</author>
-    <libraryname>onelogin</libraryname>
+    <libraryname>oneloginsaml</libraryname>
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
     <creationDate>January 2019</creationDate>
