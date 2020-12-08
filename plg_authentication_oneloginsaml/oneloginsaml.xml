@@ -1,4 +1,4 @@
-<extension type="plugin" group="authtentication" method="upgrade">
+<extension type="plugin" group="authentication" method="upgrade">
     <name>plg_authentication_oneloginsaml</name>
     <author>OneLogin INC.</author>
     <authorEmail>support@onelogin.com</authorEmail>

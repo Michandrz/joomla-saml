@@ -38,12 +38,12 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
      * @since   1.7.0
      */
     public function __construct($config = array()) {
-
-        
         //make the Library easily accessable
+        
         $oneLoginPlugin = PluginHelper::getPlugin('system', 'oneloginsaml');
         $plgParams = new Registry($oneLoginPlugin->params);
         $this->_oneloginPhpSaml = new OneLogin_Saml2_Auth_Joomla($plgParams);
+       
 
         parent::__construct($config);
     }
@@ -53,22 +53,23 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
      */
     public function samlLogin($redirect = null) {
         
-        $this->setRedirect($this->_oneloginPhpSaml->login(null, array(), false, false, true));
+        $this->setRedirect($this->_oneloginPhpSaml->login('/', array(), false, false, true));
         
         return $this;
     }
     
     public function acs($redirect = null) {
-        
+        //process the responce
         $this->_oneloginPhpSaml->processResponse();
-       
+        //pass the library to the Authentication plugin
         $credentials['oneLoginSAML'] = $this->_oneloginPhpSaml;
         
+        //do the login 
         $app = Factory::getApplication();
         $app->login($credentials, $options);
         
-
-        
+        //redirect
+        $this->setRedirect($this->_oneloginPhpSaml->login("/", array(), false, false, true));
     }
     /**
      * Redirect to IDP for a cookie refresh
