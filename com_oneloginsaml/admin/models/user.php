@@ -55,7 +55,6 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
         foreach($saml_attrs as $samlattributename => $samlattribute) {
             if(array_key_exists($samlattributename, $attrmap)) {
                 $app->triggerEvent('onUserUpdateInfo', array($user, $attrmap[$samlattributename], $samlattribute[0]));
-                //$dispatcher->trigger('onUserUpdateInfo', array($user, $attrmap[$samlattributename], $samlattribute[0]));
             }
         }
     }
@@ -162,7 +161,16 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
      * @todo wite this function
      */
     public function createUser($saml_attrs) {
+        //first set the matcher attributes
+        $this->setMatcher($saml_attrs);
+        $user = new User;
+        $this->processAttributes($user, $saml_attrs);
+        $this->setGroups($user, $saml_attrs);
         
-    }
-    
+        if($user->save()) {
+            return $user;
+        } else {
+            return false;
+        }
+    }    
 }

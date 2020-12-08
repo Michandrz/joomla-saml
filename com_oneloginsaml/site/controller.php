@@ -69,7 +69,7 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
         $app->login($credentials, $options);
         
         //redirect
-        $this->setRedirect($this->_oneloginPhpSaml->login("/", array(), false, false, true));
+        $this->setRedirect(urldecode($app->input->get('RelayState'), '/', 'raw'));
     }
     /**
      * Redirect to IDP for a cookie refresh

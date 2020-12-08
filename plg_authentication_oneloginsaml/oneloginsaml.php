@@ -52,7 +52,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                         $oneloginUserModel->setGroups($loadedUser, $attrs);
                         $loadedUser->save();
                     }
-                    
+
                     if (JFactory::getApplication()->isClient('administrator')) {
                         $response->language = $loadedUser->getParam('admin_language');
                     } else {
@@ -63,38 +63,41 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                     $response->username = $loadedUser->username;
                     $response->status = Authentication::STATUS_SUCCESS;
                     $response->error_message = null;
-                    
+
                     $session = Factory::getSession();
                     $session->set('user', $loadedUser);
                     $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
                     $session->set('saml_login', 1);
-                    
-                    
                 } elseif ($params->get('onelogin_saml_autocreate', false, 'boolean')) {
                     //user doesn't exist, but we can create it
                     $loadedUser = $oneloginUserModel->createUser($attrs);
-                    $response->email = $loadedUser->email;
-                    $response->fullname = $loadedUser->name;
-                    $response->username = $loadedUser->username;
-                    
-                    if (JFactory::getApplication()->isClient('administrator')) {
-                        $response->language = $loadedUser->getParam('admin_language');
+                    if ($loadedUser === false) {
+                        $response->status = Authentication::STATUS_DENIED;
+                        $response->message = 'USER NOT EXISTS AND FAILED TO CREATE';
                     } else {
-                        $response->language = $loadedUser->getParam('language');
+                        $response->email = $loadedUser->email;
+                        $response->fullname = $loadedUser->name;
+                        $response->username = $loadedUser->username;
+
+                        if (JFactory::getApplication()->isClient('administrator')) {
+                            $response->language = $loadedUser->getParam('admin_language');
+                        } else {
+                            $response->language = $loadedUser->getParam('language');
+                        }
+                        $response->email = $loadedUser->email;
+                        $response->fullname = $loadedUser->name;
+                        $response->username = $loadedUser->username;
+                        $response->status = Authentication::STATUS_SUCCESS;
+                        $response->error_message = null;
+
+                        $session = Factory::getSession();
+                        $session->set('user', $loadedUser);
+                        $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
+                        $session->set('saml_login', 1);
                     }
-                    $response->email = $loadedUser->email;
-                    $response->fullname = $loadedUser->name;
-                    $response->username = $loadedUser->username;
-                    $response->status = Authentication::STATUS_SUCCESS;
-                    $response->error_message = null;
-                    
-                    $session = Factory::getSession();
-                    $session->set('user', $loadedUser);
-                    $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
-                    $session->set('saml_login', 1);
                 } else {
                     $response->status = Authentication::STATUS_DENIED;
-                    $response->message = 'USER NOT EXISTS AND FAILED THE CREATION PROCESS';
+                    $response->message = 'USER NOT EXISTS AND NOT ALLOWED TO CREATE';
                 }
             } else {
                 $response->status = Authentication::STATUS_FAILURE;

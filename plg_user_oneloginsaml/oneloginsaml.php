@@ -7,6 +7,8 @@
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
  */
+use \Joomla\CMS\String\PunycodeHelper;
+
     class PlgUserOneloginsaml extends \Joomla\CMS\Plugin\CMSPlugin {
         /*
           public function onUserAuthenticate($credentials, $options, &$response)
@@ -29,7 +31,7 @@
                     $user->username = $value;
                     break;
                 case 'Email' :
-                    $user->email = $value;
+                    $user->email = PunycodeHelper::emailToPunycode($value);
                     break;
                 case 'Name' :
                     $user->name = $value;
