@@ -68,6 +68,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                     $session->set('user', $loadedUser);
                     $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
                     $session->set('saml_login', 1);
+                    return;
                 } elseif ($params->get('onelogin_saml_autocreate', false, 'boolean')) {
                     //user doesn't exist, but we can create it
                     $loadedUser = $oneloginUserModel->createUser($attrs);
@@ -94,10 +95,12 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                         $session->set('user', $loadedUser);
                         $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
                         $session->set('saml_login', 1);
+                        return;
                     }
                 } else {
                     $response->status = Authentication::STATUS_DENIED;
-                    $response->message = 'USER NOT EXISTS AND NOT ALLOWED TO CREATE';
+                    $response->message = 'USER_NOT_EXISTS_AND NOT ALLOWED TO CREATE';
+                    return;
                 }
             } else {
                 $response->status = Authentication::STATUS_FAILURE;
@@ -106,9 +109,11 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                     $msg_error .= '<br>' . implode(', ', $errors);
                 }
                 $response->message = $msg_error;
+                return;
             }
         }
         $response->status = Authentication::STATUS_UNKNOWN;
+        return;
     }
 
 }

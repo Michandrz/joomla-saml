@@ -79,13 +79,15 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
         $groups = array();
         
         foreach($saml_groups as $saml_group) {
-            $groups[] = $groupmap[$saml_group];
+            if(isset($groupmap[$saml_group])) {
+                $groups[] = $groupmap[$saml_group];
+            }
         }
         $groups = array_unique($groups);
         
         if(count($groups) < 1) {
             $com_userParams = ComponentHelper::getParams('com_users');
-            $groups = $com_userParams->get('new_usertype', 2);
+            $groups[] = $com_userParams->get('new_usertype', 2);
         }
         
         UserHelper::setUserGroups($user->id, $groups);
