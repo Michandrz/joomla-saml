@@ -53,11 +53,18 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
      */
     public function samlLogin($redirect = null) {
         
-        $this->setRedirect($this->_oneloginPhpSaml->login('/', array(), false, false, true));
+        $this->setRedirect($this->_oneloginPhpSaml->login('index.php', array(), false, false, true));
         
         return $this;
     }
     
+    public function samlLogout($redirect = null) {
+        $this->setRedirect($this->_oneloginPhpSaml->logout('index.php', array(), false, false, true));
+        
+        return $this;
+    }
+
+
     public function acs($redirect = null) {
         //process the responce
         $this->_oneloginPhpSaml->processResponse();
@@ -69,7 +76,7 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
         $app->login($credentials, $options);
         
         //redirect
-        $this->setRedirect(urldecode($app->input->get('RelayState'), '/', 'raw'));
+        $this->setRedirect(urldecode($app->input->get('RelayState'), 'index.php', 'raw'));
     }
     /**
      * Redirect to IDP for a cookie refresh

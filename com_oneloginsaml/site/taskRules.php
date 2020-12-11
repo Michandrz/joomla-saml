@@ -95,44 +95,7 @@ class oneloginsamlTaskRules implements \Joomla\CMS\Component\Router\Rules\RulesI
 	 */
 	public function build(&$query, &$segments)
 	{
-		$menu_found = false;
-
-		if (isset($query['Itemid']))
-		{
-			$item = $this->router->menu->getItem($query['Itemid']);
-
-			if (!isset($query['option']) || ($item && $item->query['option'] === $query['option']))
-			{
-				$menu_found = true;
-			}
-		}
-
-		if (!$menu_found && isset($query['view']))
-		{
-			$views = $this->router->getViews();
-
-			if (isset($views[$query['view']]))
-			{
-				$view = $views[$query['view']];
-				$segments[] = $query['view'];
-
-				if ($view->key && isset($query[$view->key]))
-				{
-					if (is_callable(array($this->router, 'get' . ucfirst($view->name) . 'Segment')))
-					{
-						$result = call_user_func_array(array($this->router, 'get' . ucfirst($view->name) . 'Segment'), array($query[$view->key], $query));
-						$segments[] = str_replace(':', '-', array_shift($result));
-					}
-					else
-					{
-						$segments[] = str_replace(':', '-', $query[$view->key]);
-					}
-
-					unset($query[$views[$query['view']]->key]);
-				}
-
-				unset($query['view']);
-			}
-		}
-	}
+            $segments[] = $query['task'];
+            unset($query['task']);
+        }
 }
