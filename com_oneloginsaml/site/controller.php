@@ -59,8 +59,10 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
     }
     
     public function samlLogout($redirect = null) {
-        $this->setRedirect($this->_oneloginPhpSaml->logout('index.php', array(), false, false, true));
+        $this->setRedirect($this->_oneloginPhpSaml->logout('index.php', array(), null, null, true));
         
+        $app = Factory::getApplication();
+        $app->logout();
         return $this;
     }
 
@@ -93,11 +95,11 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
     /**
      * Post IDP Logout
      * @param string $redirect Base 64 encoded URL
-     * @todo write this
+     * @todo handle redirect
      */
     public function sls($redirect = null) {
 
-        
+        $this->_oneloginPhpSaml->processSLO();
         
         return $this;
     
