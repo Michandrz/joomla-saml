@@ -6,8 +6,7 @@
  * @author Michael Andrzejewski <michael@jetskitechnologies.com>
  */
 use \Joomla\CMS\Factory;
-use \Joomla\CMS\User\User;
-
+  
 /**
  * Overrides the default logout links and makes login links
  */
@@ -23,12 +22,11 @@ class PlgContentOneloginsaml extends \Joomla\CMS\Plugin\CMSPlugin {
                 $loginFormMarkup->xpath('//input[@name=\'task\']')[0]->attributes()->value = 'samlLogout';
             } else {
                 $htmlControls = $loginFormMarkup->xpath('//button/parent::*')[0];
-                $newLink = $htmlControls->addChild('a', 'SSO Log in');
+                $newLink = $htmlControls->addChild('a', 'SAML Login');
                 $newLink->addAttribute('href', 'index.php?option=com_oneloginsaml&task=samlLogin');
                 $newLink->addAttribute('class', 'btn btn-primary');
             }
             $module->content = $loginFormMarkup->asXML();
         }
     }
-
 }
