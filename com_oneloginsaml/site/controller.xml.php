@@ -43,7 +43,6 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
         $oneLoginPlugin = PluginHelper::getPlugin('system', 'oneloginsaml');
         $plgParams = new Registry($oneLoginPlugin->params);
         $this->_oneloginPhpSaml = new OneLogin_Saml2_Auth_Joomla($plgParams);
-
         parent::__construct($config);
     }
 
@@ -64,7 +63,7 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
         $settings = $this->_oneloginPhpSaml->getSettings();
         $errors = $settings->validateMetadata($settings->getSPMetadata());
         if (empty($errors)) {
-            $settings->getSPMetadata();
+            print_r($settings->getSPMetadata());
         } else {
             throw new OneLogin_Saml2_Error(
                     'Invalid SP metadata: ' . implode(', ', $errors),

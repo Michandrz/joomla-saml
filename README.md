@@ -16,8 +16,9 @@ Features
 
 * Single sign on
 * Single log out
-* Just on time provisioning
+* Just in time provisioning
 * Supports groups
+* Supports attribute passing
 
 
 Pre-requisites
@@ -43,12 +44,15 @@ At the "Description" tab you will find info describing the rest of the tabs. Onc
 
 The metadata of the Joomla SP will be available at
 ``` 
-http://<path to joomla/plugins/user/oneloginsaml/oneloginsaml.php?metadata
+http://<path to joomla/index.php?option=com_oneloginsaml&task=getMetadata&format=xml
 ```
 
 How to add "SAML Login" link
 ----------------------------
 
+If you are using the Plg_content and the standard login form, it will automatically add SAMLLogin Links.
+
+To manually add them:
 The "SAML Login" link can be added in at least 2 different places:
 
 * Add the link to the "Login Form module". At the admin interface, click on Extensions > Module Manager and search the
@@ -56,18 +60,19 @@ The "SAML Login" link can be added in at least 2 different places:
    pre-text add the following:
 
 ```
-   <a href="http://<path to joomla>/plugins/user/oneloginsaml/oneloginsaml.php?sso">SAML Login</a>
+   <a href="http://<path to joomla>/index.php?option=com_login&task=samlLogin">SAML Login</a>
 ```
 
 * Add the link to the main login form (Component User, View login). At the admin interface, click on Extensions > Module Manager
    and edit the "Site" templates that are currently used. Click on "Create Overrides" and select at "Components" the "com_users" > "login". Later click on the editor and edit html > com_users > login > default_login.php. You will see the a mix of php and html, search the line around 78 and after the JLOGIN button set:
 
 ``` 
-   <a href="http://<path to joomla>/plugins/user/oneloginsaml/oneloginsaml.php?sso" style="padding-left:20px;">SAML Login</a>
+   <a href="http://<path to joomla>/index.php?option=com_login&task=samlLogin" style="padding-left:20px;">SAML Login</a>
 ```
 
 Local Login
 -----------
 
-When SAML enabled, you can always continue login through other login backends.
-Maybe we will disable the local login in future but will provide a way to rescue the system in case that something go wrong with SAML.
+When SAML enabled, you can always continue login through other login Plugins.
+
+You can disable local login by removing the joomla authentication plugin. We do not recomend this as you will have to go to the database to rescue the system. 
