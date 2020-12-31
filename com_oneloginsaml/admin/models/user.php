@@ -6,7 +6,6 @@
  *  @author Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 use \Joomla\CMS\User\User;
-use \Joomla\CMS\User\UserHelper;
 use \Joomla\CMS\Plugin\PluginHelper;
 use \Joomla\CMS\Component\ComponentHelper;
 use \Joomla\CMS\Factory;
@@ -39,7 +38,7 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
      * @param array $saml_attrs
      * @since 1.7.0
      */
-    public function processAttributes($user, $saml_attrs) {
+    public function processAttributes(&$user, $saml_attrs) {
         
         //load the attrmap
         $query = $this->_db->getQuery(true);
@@ -57,6 +56,7 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
                 $app->triggerEvent('onUserUpdateInfo', array($user, $attrmap[$samlattributename], $samlattribute[0]));
             }
         }
+        return $this;
     }
     /**
      * 
@@ -64,7 +64,7 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
      * @param array $saml_attrs
      * @since 1.7.0
      */
-    public function setGroups($user, $saml_attrs) {
+    public function setGroups(&$user, $saml_attrs) {
         
         //load the groupmap
         $query = $this->_db->getQuery(true);
@@ -90,7 +90,8 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
             $groups[] = $com_userParams->get('new_usertype', 2);
         }
         
-        UserHelper::setUserGroups($user->id, $groups);
+        $user->groups =  $groups;
+        return $this;
     }
     /**
      * Sets the Matchers for the samlparams to come through
@@ -135,7 +136,7 @@ class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
             return $this->user;
         }
         if($this->matcher == null) {
-            throw new Exception("Call to getUser before processAttribures", 500);
+            throw new Exception("Call to getUser before setting Metcher", 500);
         }
         $column = $this->matcher['local'];
         $value = $this->matcherValue;

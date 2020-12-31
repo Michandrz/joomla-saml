@@ -64,6 +64,7 @@
             <filename>controllers/attributes.php</filename>
             <filename>controllers/groups.php</filename>
             <filename>controllers/config.php</filename>
+            <filename>controllers/login.php</filename>
             <folder>language</folder>
             <folder>language/en-GB</folder>
             <filename>language/en-GB/en-GB.com_oneloginsaml.sys.ini</filename>
@@ -141,6 +142,7 @@
             <filename>controller.php</filename>
             <filename>index.html</filename>
             <filename>oneloginsaml.php</filename>
+            <filename>login.php</filename>
         </files>
         <languages folder="admin">
             <language tag="en-US">language/en-US/en-US.com_oneloginsaml.ini</language>

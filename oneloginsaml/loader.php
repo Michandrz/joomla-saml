@@ -6,6 +6,8 @@
  *  @author Michael Andrzejewski <michael@jetskitechnologies.com>
  */
 
+use Joomla\CMS\Factory;
+
 /**
  * Wrapper for the library interface to process Joomla style setting params
  * into array for the library.
@@ -13,7 +15,7 @@
  * @since 1.6.0
  */
 class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
-    
+
     /**
      * Library wrapper to format Joomla Style params into an array for the Lib
      * 
@@ -23,7 +25,7 @@ class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
     public function __construct($plgParams) {
         parent::__construct($this->formatSettings($plgParams));
     }
-    
+
     /**
      * Fuction to turn JRegistry into an array.
      * 
@@ -32,16 +34,23 @@ class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
      * @since 1.6.0
      */
     protected function formatSettings($saml_params) {
+        if (Factory::getApplication()->isClient('administrator')) {
+            $acs = 'administrator/?option=plg_onelogin&task=login.acs';
+            $sls ='administrator/?option=plg_onelogin&task=login.sls';
+        } else {
+            $acs = 'component/oneloginsaml/acs';
+            $sls = 'component/oneloginsaml/sls';
+        }
         return array(
             'strict' => $saml_params->get('onelogin_saml_advanced_settings_strict_mode'),
             'debug' => $saml_params->get('onelogin_saml_advanced_settings_debug'),
             'sp' => array(
                 'entityId' => ($saml_params->get('onelogin_saml_advanced_settings_sp_entity_id') ? $saml_params->get('onelogin_saml_advanced_settings_sp_entity_id') : 'php-saml'),
                 'assertionConsumerService' => array(
-                    'url' => JURI::root() . 'component/oneloginsaml/acs',
+                    'url' => JURI::root() . $acs,
                 ),
                 'singleLogoutService' => array(
-                    'url' => JURI::root() . 'component/oneloginsaml/sls',
+                    'url' => JURI::root() . $sls,
                 ),
                 'NameIDFormat' => 'urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified',
                 'x509cert' => $saml_params->get('onelogin_saml_advanced_settings_sp_x509cert'),
@@ -86,4 +95,5 @@ class OneLogin_Saml2_Auth_Joomla extends Onelogin_Saml2_Auth {
             ),
         );
     }
+
 }
