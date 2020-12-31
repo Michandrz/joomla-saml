@@ -33,7 +33,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
             //bring in the configuration
             BaseDatabaseModel::addIncludePath(JPATH_BASE . '/administrator/components/com_oneloginsaml/models');
             $oneloginConfigModel = BaseDatabaseModel::getInstance('Config', 'oneloginsamlModel');
-            $oneloginConfigModel->getPluginParams();
+            $params = $oneloginConfigModel->getPluginParams();
             $debug = $params->get('onelogin_saml_advanced_settings_debug');
 
             if ($saml_lib->isAuthenticated()) {
@@ -50,8 +50,8 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                 if (is_a($loadedUser, "\Joomla\CMS\User\User")) {
                     //user exists
                     if ($params->get('onelogin_saml_updateuser', false, 'boolean')) {
-                        $oneloginUserModel->processAttributes($loadedUser, $attrs);
-                        $oneloginUserModel->setGroups($loadedUser, $attrs);
+                        $oneloginUserModel->processAttributes($loadedUser, $attrs)
+                                ->setGroups($loadedUser, $attrs);
                         $loadedUser->save();
                     }
 
@@ -69,7 +69,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                     $session = Factory::getSession();
                     $session->set('user', $loadedUser);
                     //@TODO reevaluate
-                    $session->set('saml_login_expire', strtotime('1 hour from now'));
+                    $session->set('saml_login_expire', time() + 3600);
                     $session->set('saml_login', 1);
                     return;
                 } elseif ($params->get('onelogin_saml_autocreate', false, 'boolean')) {
@@ -97,7 +97,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                         $session = Factory::getSession();
                         $session->set('user', $loadedUser);
                     //@TODO reevaluate
-                        $session->set('saml_login_expire', strtotime('1 hour from now'));
+                        $session->set('saml_login_expire', time() + 3600);
                         $session->set('saml_login', 1);
                         return;
                     }
