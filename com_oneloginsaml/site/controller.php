@@ -78,7 +78,7 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
         $app->login($credentials, $options);
         
         //redirect
-        $this->setRedirect(urldecode($app->input->get('RelayState'), 'index.php', 'raw'));
+        $this->setRedirect(urldecode($app->input->get('RelayState', 'index.php', 'raw')));
     }
     /**
      * Redirect to IDP for a cookie refresh
@@ -95,11 +95,16 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
     /**
      * Post IDP Logout
      * @param string $redirect Base 64 encoded URL
-     * @todo handle redirect
      */
     public function sls($redirect = null) {
-
+        
+        $app = Factory::getApplication();
+        
+        //retrive the logout
         $this->_oneloginPhpSaml->processSLO();
+        
+        //redirect
+        $this->setRedirect(urldecode($app->input->get('RelayState', 'index.php', 'raw')));
         
         return $this;
     
