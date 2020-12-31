@@ -91,12 +91,13 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
     }
     
     /**
-     * Redirect to IDP for Logout
+     * Post IDP Logout
      * @param string $redirect Base 64 encoded URL
+     * @todo write this
      */
     public function sls($redirect = null) {
 
-        $this->setRedirect($this->_oneloginPhpSaml->login(null, array(), false, false, true));
+        
         
         return $this;
     
