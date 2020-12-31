@@ -7,6 +7,7 @@
  */
 use \Joomla\CMS\Authentication\Authentication;
 use \Joomla\CMS\Factory;
+use \Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 /**
  * Description of plgAuthenticationOneloginsaml
@@ -30,15 +31,16 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
             $saml_lib = $credentials['oneLoginSAML'];
 
             //bring in the configuration
-            JModelLegacy::addIncludePath(JPATH_BASE . '/administrator/components/com_oneloginsaml/models');
-            $params = JModelLegacy::getInstance('Config', 'oneloginsamlModel')->getPluginParams();
+            BaseDatabaseModel::addIncludePath(JPATH_BASE . '/administrator/components/com_oneloginsaml/models');
+            $oneloginConfigModel = BaseDatabaseModel::getInstance('Config', 'oneloginsamlModel');
+            $oneloginConfigModel->getPluginParams();
             $debug = $params->get('onelogin_saml_advanced_settings_debug');
 
             if ($saml_lib->isAuthenticated()) {
                 $attrs = $saml_lib->getAttributes();
 
                 //we're authenticed to the IDP, lets load the User data model
-                $oneloginUserModel = JModelLegacy::getInstance('User', 'oneloginsamlModel');
+                $oneloginUserModel = BaseDatabaseModel::getInstance('User', 'oneloginsamlModel');
 
                 //populate the matcher
                 $oneloginUserModel->setMatcher($attrs);
@@ -66,7 +68,8 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
 
                     $session = Factory::getSession();
                     $session->set('user', $loadedUser);
-                    $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
+                    //@TODO reevaluate
+                    $session->set('saml_login_expire', strtotime('1 hour from now'));
                     $session->set('saml_login', 1);
                     return;
                 } elseif ($params->get('onelogin_saml_autocreate', false, 'boolean')) {
@@ -93,7 +96,8 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
 
                         $session = Factory::getSession();
                         $session->set('user', $loadedUser);
-                        $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
+                    //@TODO reevaluate
+                        $session->set('saml_login_expire', strtotime('1 hour from now'));
                         $session->set('saml_login', 1);
                         return;
                     }
