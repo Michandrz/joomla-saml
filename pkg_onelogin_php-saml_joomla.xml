@@ -20,6 +20,7 @@
         <file type="library" id="oneloginsaml" >oneloginsaml.zip</file>
         <file type="plugin" id="plg_authentication_oneloginsaml" group="authentication">plg_authentication_oneloginsaml.zip</file>
         <file type="plugin" id="plg_system_oneloginsaml" group="system">plg_system_oneloginsaml.zip</file>
+        <file type="plugin" id="plg_system_oneloginsaml" group="content">plg_content_oneloginsaml.zip</file>
         <file type="plugin" id="plg_user_oneloginsaml" group="user">plg_user_oneloginsaml.zip</file>
     </files>
 </extension>
