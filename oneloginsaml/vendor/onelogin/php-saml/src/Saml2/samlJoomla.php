@@ -1,9 +1,11 @@
 <?php
-
-/*
- *  @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
- *  @license     MIT
- *  @author Michael Andrzejewski <michael@jetskitechnologies.com>
+/**
+ * @package     Joomla-Saml
+ * @subpackage  lib_oneloginsaml
+ * 
+ * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
+ * @license     MIT
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 namespace OneLogin\Saml2;
 
@@ -22,6 +24,7 @@ class samlJoomla extends Auth {
     /**
      * Holds the  plugin params
      * @var Joomla\Registry\Registry
+     * @since 1.7.0
      */
     public $params;
 
@@ -29,7 +32,7 @@ class samlJoomla extends Auth {
      * Library wrapper to format Joomla Style params into an array for the Lib
      * 
      * @param \JRegistry $plgParams
-     * @since 1.6.0
+     * @since 1.7.0
      */
     public function __construct() {
         $this->params = LibraryHelper::getParams('oneloginsaml');
@@ -41,7 +44,7 @@ class samlJoomla extends Auth {
      * 
      * @param \JRegistry $saml_params
      * @return type
-     * @since 1.6.0
+     * @since 1.7.0
      */
     protected function formatSettings() {
         if (Factory::getApplication()->isClient('administrator')) {

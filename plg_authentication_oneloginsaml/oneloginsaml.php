@@ -1,16 +1,19 @@
 <?php
-
 /**
- *  @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
- *  @license     MIT
- *  @author      Michael Andrzejewski<michael@jetskitechnologies.com>
+ * @package     Joomla-Saml
+ * @subpackage  plg_authentication_oneloginsaml
+ * 
+ * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
+ * @license     MIT
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
+ * @author      Sixto Martin <pitbulk@gmail.com>
  */
 use Joomla\CMS\Authentication\Authentication;
 use Joomla\CMS\Factory;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel; 
 
 /**
- * Description of plgAuthenticationOneloginsaml
+ * Joomla plugin to process the saml authentication
  */
 class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
 
@@ -23,7 +26,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
      *
      * @return  void
      *
-     * @since   1.5
+     * @since   1.7.0
      */
     public function onUserAuthenticate(&$credentials, $options, &$response) {
         //if the library is not present, no login
