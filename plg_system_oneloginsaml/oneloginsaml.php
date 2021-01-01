@@ -1,24 +1,27 @@
 <?php
-
 /**
+ * @package     Joomla-Saml
+ * @subpackage  plg_system_oneloginsaml
+ * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author Michael Andrzejewski <michael@jetskitechnologies.com>
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
+
 use Joomla\CMS\Factory;
-use Joomla\CMS\Component\ComponentHelper;
-use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Language\Text;
+
 /**
- * OneLogin Plugin class
+ * Load the OneLogin library and handle admin side injection
  * 
- *  @package     OneLogin PHP-SAML Library
- *  @subpackage  OneLogin.PHP-SAML.JoomlaLoader
  */
 class PlgSystemOneloginsaml extends \Joomla\CMS\Plugin\CMSPlugin {
 
     /**
      * Register the library into the Joomla application
+     * @since 1.7.0
      * @todo code to check for saml auth expiry
+     * @todo code to handle force admin login via SAML
      */
     public function onAfterInitialise() {
         require_once JPATH_LIBRARIES . '/oneloginsaml/vendor/autoload.php';
@@ -33,12 +36,11 @@ class PlgSystemOneloginsaml extends \Joomla\CMS\Plugin\CMSPlugin {
             define('JPATH_COMPONENT_SITE', JPATH_SITE . '/components/' . 'com_oneloginsaml');
             define('JPATH_COMPONENT_ADMINISTRATOR', JPATH_ADMINISTRATOR . '/components/' . 'com_oneloginsaml');
         }
-        
-        
     }
     
     /**
      * Hack to allow for backend SSO
+     * @since 1.7.0
      * @todo I hate having to add the SAMLLogin button client side. Investigate server side methods.
      */
     public function onBeforeRender() {
@@ -46,7 +48,9 @@ class PlgSystemOneloginsaml extends \Joomla\CMS\Plugin\CMSPlugin {
 
             $response = Factory::getDocument();
             $content = 'jQuery( document ).ready(function() {
-                jQuery("button.login-button").parent().after("<a href=\"index.php?option=plg_onelogin&task=login.samlLogin\" class=\"btn btn-primary btn-block btn-large login-button\">SAML Login</a>  ");
+                jQuery("button.login-button").parent().after("<a href=\"index.php?option=plg_onelogin&task=login.samlLogin\" class=\"btn btn-primary btn-block btn-large login-button\">'
+                    . Text::_('SAML_LOGIN_BUTTON') . 
+                    '</a>  ");
             });';
             $response->addScriptDeclaration($content);
         }
