@@ -10,16 +10,26 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-use \Joomla\CMS\Table\Table;
-use \Joomla\CMS\Plugin\PluginHelper;
-use \Joomla\Registry\Registry;
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Helper\ModuleHelper;
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Helper\LibraryHelper;
+use Joomla\Registry\Registry;
 
 /**
  * Config CRDUI Model
  * @since 1.7.0
  */
-class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
+class oneloginsamlModelConfig extends Joomla\CMS\MVC\Model\AdminModel {
+    
+    protected $__paramsToPull = array(
+        'com_oneloginsaml'                  => array('component','','administrator/components/com_oneloginsaml/oneloginsaml.xml'), 
+        'plg_authentication_oneloginsaml'   => array('plugin','authentication', 'plugins/authentication/oneloginsaml/oneloginsaml.xml'),
+        'plg_system_oneloginsaml'           => array('plugin','system', 'plugins/system/oneloginsaml/oneloginsaml.xml'),
+        'plg_content_oneloginsaml'          => array('plugin','content', 'plugins/content/oneloginsaml/oneloginsaml.xml'),
+        'oneloginsaml'                      => array('library','', 'libraries/oneloginsaml/oneloginsaml.xml'),
+        );
     /**
      * 
      * Load the Table
@@ -35,16 +45,87 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
     }
     
     /**
-     *  Returns the current Plugin Params
-     * @return Registry;
+     * Gets params for a given extension
+     * 
+     * @param string $type type of extension to pull
+     * @param string $name system name of the extension to pull
+     * @param string $subset Only used for Plugins, Need to know the plugin type 'system', 'content', 'authentication', etc.
+     * @return Registry extension params
+     * @throws Exception when unable to determine extension type
      */
-    public function getPluginParams() {
+    public function getParams($type, $name, $subset = null) {
+        switch ($type) {
+            case 'plugin':
+                $extension = PluginHelper::getPlugin($subset, substr($name, strpos($name, '_', 5 )+1));
+                break;
+            case 'component':
+                $extension = ComponentHelper::getComponent($name);
+                break;
+            case 'module' :
+                $extension = ModuleHelper::getModule($name);
+                break;
+            case 'library':
+                $extension = LibraryHelper::getLibrary($name);
+                break;
+            default :
+                throw new Exception('Could not determine extension type', 500);
+        }
+
+        $Params = new Registry();
+        $Params->loadString($extension->params);
+
+        return $Params;
+    }
+
+    public function saveParams($type, $name, $subset = null, $params) {
+        switch ($type) {
+            case 'plugin':
+                $extension = PluginHelper::getPlugin($subset, substr($name, strpos($name, '_', 5 )+1));
+                break;
+            case 'component':
+                $extension = ComponentHelper::getComponent($name);
+                break;
+            case 'module' :
+                $extension = ModuleHelper::getModule($name);
+                break;
+            case 'library':
+                $extension = LibraryHelper::getLibrary($name);
+                break;
+            default :
+                throw new Exception('Could not determine extension type', 500);
+        }
+        if(!isset($extension->id)) {
+            throw new Exception('Could not retrive config for ' . $name . '    subset=' . $subset . ' called=' . substr($name, strpos($name, '_', 5 )) , 500);
+        }
+        $query = $this->_db->getQuery(true);
+        $query->update('#__extensions');
+        $query->set($query->quoteName('params') . ' = ' . $query->quote($params->toString()));
+        $query->where($query->quoteName('extension_id') . ' = ' . $extension->id);
+        $this->_db->setQuery($query);
+        $this->_db->execute();
         
-        $oneLoginPlugin = PluginHelper::getPlugin('system', 'oneloginsaml');
-        $plgParams = new Registry();
-        $plgParams->loadString($oneLoginPlugin->params);
-        
-        return $plgParams;
+        return true;
+    }
+    
+    public function getFields() {
+        $return = new DOMDocument('1.0');
+        $return->loadXML('<form></form>');
+        foreach ($this->__paramsToPull as $name => $attrs) {
+            $manifest = new DOMDocument('1.0');
+            $manifest->load(JPATH_ROOT . '/' . $attrs[2]);
+            $fieldset = $manifest->getElementsByTagName('fieldset');
+            for ($i = 0; $i < $fieldset->length; $i++) {
+                $node = $return->importNode($fieldset->item($i), true);
+                for($n = 0; $n < $node->childNodes->count(); $n++) {
+                    if($node->childNodes->item($n)->hasAttributes()) {
+                    $node->childNodes->item($n)->attributes->getNamedItem('name')->nodeValue = $name . '.' . $node->childNodes->item($n)->attributes->getNamedItem('name')->nodeValue;
+                    }
+                }
+                $return->documentElement->appendChild($node);
+                
+            }
+        }
+        return $return->saveXML();
     }
 
     /**
@@ -56,8 +137,12 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
 
         $return = array();
 
-        foreach ($this->getPluginParams()->toArray() as $key => $value) {
-            $return[$key] = $value;
+        foreach ($this->__paramsToPull as $name => $settings) {
+            //$return->append($name, $this->getParams($settings[0], $name, $value[1]));
+            
+            foreach($this->getParams($settings[0], $name, $settings[1])->toArray() as $key => $value) {
+                $return[$name . '.' . $key] = $value;
+            }
         }
         return $return;
     }
@@ -73,7 +158,7 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
     public function getForm($data = array(), $loadData = true) {
         // Get the form.
         $form = $this->loadForm(
-                'com_oneloginsaml.config', 'config', array(
+                'com_oneloginsaml.config', $this->getFields(), array(
             'control' => 'jform',
             'load_data' => $loadData
                 )
@@ -91,18 +176,21 @@ class oneloginsamlModelConfig extends \Joomla\CMS\MVC\Model\AdminModel {
      * @param array $data data in feild=>value format
      */
     public function save($data) {
-        $plgParams = $this->getPluginParams();
-
-        foreach ($data as $key => $value) {
-            $plgParams->set($key, $value);
+        $cache = array();
+        
+        foreach($this->__paramsToPull as $param => $settings) {
+            $cache[$param] = $this->getParams($settings[0], $param, $settings[1]); 
         }
-
-        $query = $this->_db->getQuery(true);
-        $query->update('#__extensions')
-                ->set($query->quoteName('params') . '=' . $query->quote($plgParams->toString()))
-                ->where($query->quoteName('element') . '=' . $query->quote('oneloginsaml'));
-        $this->_db->setQuery($query);
-        $this->_db->execute();
+        
+        foreach($data as $key => $value) {
+            $name = substr($key, 0, strpos($key,'.'));
+            $field = substr($key, strpos($key,'.'));
+            $cache[$name]->set($field, $value);
+        }
+        
+        foreach($cache as $extenName =>$updated) {
+            $this->saveParams($this->__paramsToPull[$extenName][0], $extenName, $this->__paramsToPull[$extenName][1], $updated);
+        }
     }
 
 }

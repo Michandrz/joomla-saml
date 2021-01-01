@@ -10,9 +10,10 @@
  */
 defined('_JEXEC') or die;
 
-use \Joomla\CMS\Plugin\PluginHelper;
-use \Joomla\Registry\Registry;
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\Registry\Registry;
+use Joomla\CMS\Factory;
+use OneLogin\Saml2\samlJoomla;
 
 /**
  * Component main controller
@@ -20,7 +21,7 @@ use \Joomla\CMS\Factory;
  * @todo program redirect
  * @since 1.7.0
  */
-class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
+class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
 
     /**
      *
@@ -38,15 +39,13 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
      * @since   1.7.0
      */
     public function __construct($config = array()) {
-        //make the Library easily accessable
-        
-        $oneLoginPlugin = PluginHelper::getPlugin('system', 'oneloginsaml');
-        $plgParams = new Registry($oneLoginPlugin->params);
-        $this->_oneloginPhpSaml = new OneLogin_Saml2_Auth_Joomla($plgParams);
+        //make the Library easily accessablE
+        $this->_oneloginPhpSaml = new samlJoomla();
        
 
         parent::__construct($config);
     }
+    
     /**
      * Redirect to IDP for Login
      * @param string $redirect Base 64 encoded URL

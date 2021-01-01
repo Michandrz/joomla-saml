@@ -9,26 +9,31 @@
  */
 // No direct access to this file
 defined('_JEXEC') or die('Restricted Access');
+
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+Use Joomla\CMS\Router\Route;
+
 ?>
 <form action="index.php?option=com_oneloginsaml&view=attributes" method="post" id="adminForm" name="adminForm">
     <table class="table table-striped table-hover">
         <thead>
             <tr>
-                <th width="1%"><?php echo JText::_('COM_ONELOGIN_NUM'); ?></th>
+                <th width="1%"><?php echo Text::_('COM_ONELOGIN_NUM'); ?></th>
                 <th width="2%">
-                    <?php echo JHtml::_('grid.checkall'); ?>
+                    <?php echo HTMLHelper::_('grid.checkall'); ?>
                 </th>
                 <th width="40%"> 
-                    <?php echo JText::_('COM_ONELOGIN_ATTR_LOCAL'); ?>
+                    <?php echo Text::_('COM_ONELOGIN_ATTR_LOCAL'); ?>
                 </th>
                 <th width="40%">
-                    <?php echo JText::_('COM_ONELOGIN_ATTR_IDP'); ?>
+                    <?php echo Text::_('COM_ONELOGIN_ATTR_IDP'); ?>
                 </th>
                 <th width="10%">
-                    <?php echo JText::_('COM_ONELOGIN_ATTR_MATCHER'); ?>
+                    <?php echo Text::_('COM_ONELOGIN_ATTR_MATCHER'); ?>
                 </th>
                 <th width="2%">
-                    <?php echo JText::_('COM_ONELOGIN_ID'); ?>
+                    <?php echo Text::_('COM_ONELOGIN_ID'); ?>
                 </th>
             </tr>
         </thead>
@@ -43,7 +48,7 @@ defined('_JEXEC') or die('Restricted Access');
             <?php if (!empty($this->items)) { ?>
                 <?php
                 foreach ($this->items as $i => $row) {
-                    $link = JRoute::_('index.php?option=com_oneloginsaml&task=attributes.editButton&cid=' . $row->id);
+                    $link = Route::_('index.php?option=com_oneloginsaml&task=attributes.editButton&cid=' . $row->id);
                     ?>
 
                     <tr>
@@ -51,7 +56,7 @@ defined('_JEXEC') or die('Restricted Access');
                             <?php echo $this->pagination->getRowOffset($i); ?>
                         </td>
                         <td>
-                            <?php echo JHtml::_('grid.id', $i, $row->id); ?>
+                            <?php echo HTMLHelper::_('grid.id', $i, $row->id); ?>
                         </td>
                         <td>
                             <a href="<?php echo $link; ?>" >
@@ -67,7 +72,7 @@ defined('_JEXEC') or die('Restricted Access');
                             <?php if ($row->match) { ?>
                                 <span>Current</span>
                             <?php } else { ?>
-                                <a href="<?php echo JRoute::_('index.php?option=com_oneloginsaml&task=attributes.setMatcher&id=' . $row->id); ?>">Set Matcher</a>
+                                <a href="<?php echo Route::_('index.php?option=com_oneloginsaml&task=attributes.setMatcher&id=' . $row->id); ?>">Set Matcher</a>
                             <?php } ?>
                         </td>
                         <td align="center">
@@ -80,5 +85,5 @@ defined('_JEXEC') or die('Restricted Access');
     </table>
     <input type="hidden" name="task" value=""/>
     <input type="hidden" name="boxchecked" value="0"/>
-    <?php echo JHtml::_('form.token'); ?>
+    <?php echo HTMLHelper::_('form.token'); ?>
 </form>

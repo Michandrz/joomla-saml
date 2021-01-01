@@ -78,7 +78,6 @@
             <folder>models</folder>
             <folder>models/forms</folder>
             <filename>models/forms/attribute.xml</filename>
-            <filename>models/forms/config.xml</filename>
             <filename>models/forms/group.xml</filename>
             <filename>models/forms/index.html</filename>
             <filename>models/attribute.php</filename>

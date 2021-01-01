@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
  * Table class for the attributes
  * @since 1.7.0
  */
-class oneloginsamlTableAttributes extends JTable
+class oneloginsamlTableAttributes extends Joomla\CMS\Table\Table
 {
 	/**
 	 * Constructor

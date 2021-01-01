@@ -5,12 +5,12 @@
  * @license     MIT
  * @author Michael Andrzejewski <michael@jetskitechnologies.com>
  */
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Factory;
   
 /**
  * Overrides the default logout links and makes login links
  */
-class PlgContentOneloginsaml extends \Joomla\CMS\Plugin\CMSPlugin {
+class PlgContentOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
 
     public function onRenderModule(&$module, &$params) {
         $session = Factory::getSession();

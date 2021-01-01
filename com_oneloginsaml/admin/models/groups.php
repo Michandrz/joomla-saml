@@ -10,12 +10,12 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Factory;
 /**
  * Groups CRUDI Model
  * @since 1.6.0
  */
-class oneloginsamlModelGroups extends \Joomla\CMS\MVC\Model\ListModel
+class oneloginsamlModelGroups extends Joomla\CMS\MVC\Model\ListModel
 {
     /**
      *reference to the system's DB

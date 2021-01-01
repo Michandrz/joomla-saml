@@ -10,14 +10,14 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-use \Joomla\CMS\Toolbar\ToolbarHelper;
-use \Joomla\CMS\Factory;
-use \Joomla\CMS\Language\Text;
+use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Factory;
+use Joomla\CMS\Language\Text;
 /**
  * View of Individual Group 
  * @since 1.7.0
  */
-class oneloginsamlViewGroup extends \Joomla\CMS\MVC\View\HtmlView
+class oneloginsamlViewGroup extends Joomla\CMS\MVC\View\HtmlView
 {
 
     /**

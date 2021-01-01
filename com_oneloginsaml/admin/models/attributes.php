@@ -14,7 +14,7 @@ defined('_JEXEC') or die('Restricted access');
  * Attribute CRUDI Model
  * @since 1.0
  */
-class oneloginsamlModelAttributes extends \Joomla\CMS\MVC\Model\ListModel {
+class oneloginsamlModelAttributes extends Joomla\CMS\MVC\Model\ListModel {
 
     /**
      * Deletes attributes

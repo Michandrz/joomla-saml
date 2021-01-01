@@ -10,11 +10,13 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 /**
  * Config controller
  * @since 1.7.0
  */
-class oneloginsamlControllerConfig extends \Joomla\CMS\MVC\Controller\BaseController {
+class oneloginsamlControllerConfig extends Joomla\CMS\MVC\Controller\BaseController {
 
     /**
      * save the modified config and redirect to display
@@ -24,8 +26,8 @@ class oneloginsamlControllerConfig extends \Joomla\CMS\MVC\Controller\BaseContro
         $input = $this->getInput('jform');
         $model = $this->getModel('Config', 'oneloginsamlModel');
         $model->save($input);
-        $msg = JText::_('COM_ONELOGIN_GROUP_MAPPING_SAVED');
-        $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=config', false), $msg);
+        $msg = Text::_('COM_ONELOGIN_GROUP_MAPPING_SAVED');
+        $this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=config', false), $msg);
     }
 
     /**
@@ -33,7 +35,7 @@ class oneloginsamlControllerConfig extends \Joomla\CMS\MVC\Controller\BaseContro
      * @since 1.7.0
      */
     public function cancel() {
-        $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml', false));
+        $this->setRedirect(Route::_('index.php?option=com_oneloginsaml', false));
     }
 
     /**

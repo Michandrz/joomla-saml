@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * View list of attributes 
  */
-class oneloginsamlViewAttributes extends \Joomla\CMS\MVC\View\HtmlView
+class oneloginsamlViewAttributes extends Joomla\CMS\MVC\View\HtmlView
 {
     /**
      *  loads in all the Attributes
@@ -35,8 +35,8 @@ class oneloginsamlViewAttributes extends \Joomla\CMS\MVC\View\HtmlView
      */
     function display($tpl = null)
     {
-	$this->items		 = $this->get('Items');
-	$this->pagination	 = $this->get('Pagination');
+	$this->items		= $this->get('Items');
+	$this->pagination	= $this->get('Pagination');
 
 
 	// Check for errors.

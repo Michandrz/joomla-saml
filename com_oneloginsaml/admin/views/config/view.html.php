@@ -13,7 +13,7 @@ defined('_JEXEC') or die('Restricted access');
 /**
  * View for Onelogin Configuration
  */
-class oneloginsamlViewConfig extends \Joomla\CMS\MVC\View\HtmlView
+class oneloginsamlViewConfig extends Joomla\CMS\MVC\View\HtmlView
 {
 
     /**

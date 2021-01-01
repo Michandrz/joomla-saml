@@ -6,14 +6,145 @@
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
     <creationDate>January 2019</creationDate>
-    <version>3.4.1</version>
+    <version>3.5.1</version>
     <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
     <license>MIT</license>
+    <config>
+        <fields>
+            <fieldset name="oneloginsaml" label="LIB_PARAMS_LABEL" description="LIB_PARAMS_DEC">
+                <field name="idp_entityid" type="text"
+                       label="IDP_ENTITY_LABEL"
+                       description="IDP_ENTITY_DEC"
+                       size="40"
+                       default=""
+                />
+                <field name="idp_sso" type="text"
+                       label="IDP_SSO_LABEL"
+                       description="IDP_SSO_DEC"
+                       size="40"
+                       default=""
+                />
+                <field name="idp_slo" type="text"
+                       label="IDP_SLO_LABEL"
+                       description="IDP_SLO_DEC"
+                       size="40"
+                       default=""
+                />
+                <field name="idp_x509cert" type="textarea"
+                       label="IDP_X509CERT_LABEL"
+                       description="IDP_X509CERT_DEC"
+                       rows="8" cols="55"
+                       default=""
+                />
+                <field name="debug" type="radio"
+                       label="DEBUG_LABEL"
+                       description="DEBUG_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="strict_mode" type="radio"
+                       label="STRICT_MODE_LABEL"
+                       description="STRICT_MODE_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="sp_entity_id" type="text"
+                       label="SP_ENTITY_ID_LABEL"
+                       description="SP_ENTITY_ID_DEC"
+                       size="40"
+                       default=""
+                />
+                <field name="nameid_encrypted" type="radio"
+                       label="NAMEID_ENCRYPTED_LABEL"
+                       description="NAMEID_ENCRYPTED_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="authn_request_signed" type="radio"
+                       label="AUTHN_REQUEST_SIGNED_LABEL"
+                       description="AUTHN_REQUEST_SIGNED_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="logout_request_signed" type="radio"
+                       label="LOGOUT_REQUEST_SIGNED_LABEL"
+                       description="LOGOUT_REQUEST_SIGNED_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="logout_response_signed" type="radio"
+                       label="LOGOUT_RESPONSE_SIGNED_LABEL"
+                       description="LOGOUT_RESPONSE_SIGNED_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="want_message_signed" type="radio"
+                       label="WANT_MESSAGE_SIGNED_LABEL"
+                       description="WANT_MESSAGE_SIGNED_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="want_assertion_signed" type="radio"
+                       label="WANT_ASSERTION_SIGNED_LABEL"
+                       description="WANT_ASSERTION_SIGNED_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="want_assertion_encrypted" type="radio"
+                       label="WANT_ASSERTION_ENCRYPTED_LABEL"
+                       description="WANT_ASSERTION_ENCRYPTED_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="sp_x509cert" type="textarea"
+                       label="SP_X509CERT_LABEL"
+                       description="SP_X509CERT_DEC"
+                       rows="8" cols="55"
+                       default=""
+                />
+                <field name="sp_privatekey" type="textarea"
+                       label="SP_PRIVATEKEY_LABEL"
+                       description="SP_PRIVATEKEY_DEC"
+                       rows="8" cols="55"
+                       default=""
+                />
+                <field name="nameid_format" type="list"
+                                       label="NAMEID_FORMAT_LABEL"
+                                       description="NAMEID_FORMAT_DEC"
+                >
+                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified">unspecified</option>
+                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress">emailAddress</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:transient">transient</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent">persistent</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:encrypted">encrypted</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:kerberos">kerberos</option>
+                    <option value="urn:oasis:names:tc:SAML:1.1:nameid-format:X509SubjectName">X509SubjectName</option>
+                    <option value="urn:oasis:names:tc:SAML:2.0:nameid-format:entity">entity</option>
+                </field>
+            </fieldset>
+        </fields>
+    </config>
     <files>
-        <filename>loader.php</filename>
         <filename>oneloginsaml.xml</filename>
-        <folder>extlib</folder>
-        <folder>lib</folder>
+        <folder>vendor</folder>
     </files>
     <updateservers>
         <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>

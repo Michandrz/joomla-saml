@@ -9,13 +9,14 @@
  * @author Michael Andrzejewski <michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
-use \Joomla\CMS\Toolbar\ToolbarHelper;
+
+use Joomla\CMS\Toolbar\ToolbarHelper;
 
 /**
  * View list of all group mappings
  * @since 1.7.0
  */
-class oneloginsamlViewGroups extends \Joomla\CMS\MVC\View\HtmlView
+class oneloginsamlViewGroups extends Joomla\CMS\MVC\View\HtmlView
 {
     /**
      * Loads the view adds pagination and toolbar.
@@ -26,8 +27,8 @@ class oneloginsamlViewGroups extends \Joomla\CMS\MVC\View\HtmlView
      */
     function display($tpl = null)
     {
-	$this->items		 = $this->get('Items');
-	$this->pagination	 = $this->get('Pagination');
+	$this->items		= $this->get('Items');
+	$this->pagination	= $this->get('Pagination');
 
 
 	// Check for errors.

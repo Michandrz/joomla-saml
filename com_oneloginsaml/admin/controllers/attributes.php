@@ -10,11 +10,14 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
+
 /**
  * Attribute CRUDL controller
  * @since 1.7.0
  */
-class oneloginsamlControllerAttributes extends \Joomla\CMS\MVC\Controller\BaseController 
+class oneloginsamlControllerAttributes extends Joomla\CMS\MVC\Controller\BaseController 
 {
 
     /**
@@ -25,17 +28,17 @@ class oneloginsamlControllerAttributes extends \Joomla\CMS\MVC\Controller\BaseCo
         $input = $this->getInput('jform');
         $model = $this->getModel('Attribute', 'oneloginsamlModel');
         $model->save($input);
-        $msg = JText::_('COM_ONELOGIN_ATTRIBUTE_MAPPING_SAVED');
-        $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=attributes', false), $msg);
+        $msg = Text::_('COM_ONELOGIN_ATTRIBUTE_MAPPING_SAVED');
+        $this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=attributes', false), $msg);
     }
     public function setMatcher() {
         $input = $this->getInput('id', null, 'integer');
         if($input != null) {
             $model = $this->getModel('Attributes', 'oneloginsamlModel');
             $model->setMatcher($input);
-            $msg = JText::_('COM_ONELOGIN_ATTRIBUTE_MATCHER_UPDATED');
+            $msg = Text::_('COM_ONELOGIN_ATTRIBUTE_MATCHER_UPDATED');
         }
-        $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=attributes', false), $msg);
+        $this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=attributes', false), $msg);
     }
 
     /**
@@ -43,7 +46,7 @@ class oneloginsamlControllerAttributes extends \Joomla\CMS\MVC\Controller\BaseCo
      * @since 1.7.0
      */
     public function cancel() {
-        $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=attributes', false));
+        $this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=attributes', false));
     }
 
     /**
@@ -51,7 +54,7 @@ class oneloginsamlControllerAttributes extends \Joomla\CMS\MVC\Controller\BaseCo
      * @since 1.7.0
      */
     public function newButton() {
-        $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=attribute&layout=edit&id=0', false));
+        $this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=attribute&layout=edit&id=0', false));
     }
 
     /**
@@ -60,7 +63,7 @@ class oneloginsamlControllerAttributes extends \Joomla\CMS\MVC\Controller\BaseCo
      */
     public function editButton() {
         $input = $this->getInput('cid');
-        $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=attribute&layout=edit&id=' . $input[0], false));
+        $this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=attribute&layout=edit&id=' . $input[0], false));
     }
 
     /**
@@ -82,7 +85,7 @@ class oneloginsamlControllerAttributes extends \Joomla\CMS\MVC\Controller\BaseCo
         JFactory::getApplication()->enqueueMessage($msg);
 
         //redirect to the table
-        $this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=attributes', false));
+        $this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=attributes', false));
     }
 
     /**

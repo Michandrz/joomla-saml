@@ -10,8 +10,8 @@
  */
 defined('_JEXEC') or die;
 
-use \Joomla\CMS\Plugin\PluginHelper;
-use \Joomla\Registry\Registry;
+use Onelogin\Saml2\samlJoomla;
+use OneLogin\Saml2\Error;
 
 /**
  * Component main controller
@@ -19,7 +19,7 @@ use \Joomla\Registry\Registry;
  * @todo program redirect
  * @since 1.7.0
  */
-class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
+class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
 
     /**
      *
@@ -40,9 +40,7 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
 
 
         //make the Library easily accessable
-        $oneLoginPlugin = PluginHelper::getPlugin('system', 'oneloginsaml');
-        $plgParams = new Registry($oneLoginPlugin->params);
-        $this->_oneloginPhpSaml = new OneLogin_Saml2_Auth_Joomla($plgParams);
+        $this->_oneloginPhpSaml = new samlJoomla();
         parent::__construct($config);
     }
 
@@ -65,9 +63,9 @@ class oneloginsamlController extends \Joomla\CMS\MVC\Controller\BaseController {
         if (empty($errors)) {
             print_r($settings->getSPMetadata());
         } else {
-            throw new OneLogin_Saml2_Error(
+            throw new Error(
                     'Invalid SP metadata: ' . implode(', ', $errors),
-                    OneLogin_Saml2_Error::METADATA_SP_INVALID
+                    Error::METADATA_SP_INVALID
             );
         }
 

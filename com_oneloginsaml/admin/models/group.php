@@ -9,8 +9,8 @@
  * @author      Michael Andrzejewski<micahel@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
-use \Joomla\CMS\Table\Table;
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\Factory;
 
 /**
  *  CRUDI model for Groups

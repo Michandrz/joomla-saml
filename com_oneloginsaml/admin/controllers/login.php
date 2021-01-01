@@ -6,15 +6,16 @@
  */
 defined('_JEXEC') or die;
 
-use \Joomla\CMS\Plugin\PluginHelper;
-use \Joomla\Registry\Registry;
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\Registry\Registry;
+use Joomla\CMS\Factory;
+use OneLogin\Saml2\samlJoomla;
 /**
  * Description of login
  *
  * @author Michael Andrzejewski<michael@jetskitechnologies.com>
  */
-class oneloginsamlControllerLogin extends \Joomla\CMS\MVC\Controller\BaseController {
+class oneloginsamlControllerLogin extends Joomla\CMS\MVC\Controller\BaseController {
     
     /**
      *
@@ -33,10 +34,8 @@ class oneloginsamlControllerLogin extends \Joomla\CMS\MVC\Controller\BaseControl
      */
     public function __construct($config = array()) {
         //make the Library easily accessable
-        
-        $oneLoginPlugin = PluginHelper::getPlugin('system', 'oneloginsaml');
-        $plgParams = new Registry($oneLoginPlugin->params);
-        $this->_oneloginPhpSaml = new OneLogin_Saml2_Auth_Joomla($plgParams);
+      
+        $this->_oneloginPhpSaml = new samlJoomla();
        
 
         parent::__construct($config);

@@ -5,9 +5,9 @@
  *  @license     MIT
  *  @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
-use \Joomla\CMS\Authentication\Authentication;
-use \Joomla\CMS\Factory;
-use \Joomla\CMS\MVC\Model\BaseDatabaseModel;
+use Joomla\CMS\Authentication\Authentication;
+use Joomla\CMS\Factory;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel; 
 
 /**
  * Description of plgAuthenticationOneloginsaml
@@ -27,19 +27,18 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
      */
     public function onUserAuthenticate(&$credentials, $options, &$response) {
         //if the library is not present, no login
-        if (is_a($credentials['oneLoginSAML'], 'OneLogin_Saml2_Auth')) {
+        if (is_a($credentials['oneLoginSAML'], 'Onelogin\\Saml2\\samlJoomla')) {
             $saml_lib = $credentials['oneLoginSAML'];
 
             //bring in the configuration
-            BaseDatabaseModel::addIncludePath(JPATH_BASE . '/administrator/components/com_oneloginsaml/models');
-            $oneloginConfigModel = BaseDatabaseModel::getInstance('Config', 'oneloginsamlModel');
-            $params = $oneloginConfigModel->getPluginParams();
-            $debug = $params->get('onelogin_saml_advanced_settings_debug');
+            $debug = $this->params->get('debug', 0);
 
             if ($saml_lib->isAuthenticated()) {
                 $attrs = $saml_lib->getAttributes();
 
                 //we're authenticed to the IDP, lets load the User data model
+                BaseDatabaseModel::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_oneloginsaml/models');
+                die(print(JPATH_ADMINISTRATOR . '/components/com_oneloginsaml/models'));
                 $oneloginUserModel = BaseDatabaseModel::getInstance('User', 'oneloginsamlModel');
 
                 //populate the matcher
@@ -49,7 +48,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
 
                 if (is_a($loadedUser, "\Joomla\CMS\User\User")) {
                     //user exists
-                    if ($params->get('onelogin_saml_updateuser', false, 'boolean')) {
+                    if ($this->params->get('updateuser', false, 'boolean')) {
                         $oneloginUserModel->processAttributes($loadedUser, $attrs)
                                 ->setGroups($loadedUser, $attrs);
                         $loadedUser->save();
@@ -68,11 +67,16 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
 
                     $session = Factory::getSession();
                     $session->set('user', $loadedUser);
-                    //@TODO reevaluate
-                    $session->set('saml_login_expire', time() + 3600);
+                    
+                    if(is_numeric($saml_lib->getSessionExpiration())) {
+
+                        $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
+                    } else {
+                        $session->set('saml_login_expire', time() + $this->params->get('default_session_time', 3600));
+                    }
                     $session->set('saml_login', 1);
                     return;
-                } elseif ($params->get('onelogin_saml_autocreate', false, 'boolean')) {
+                } elseif ($this->params->get('autocreate', false, 'boolean')) {
                     //user doesn't exist, but we can create it
                     $loadedUser = $oneloginUserModel->createUser($attrs);
                     if ($loadedUser === false) {
@@ -96,8 +100,13 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
 
                         $session = Factory::getSession();
                         $session->set('user', $loadedUser);
-                    //@TODO reevaluate
-                        $session->set('saml_login_expire', time() + 3600);
+
+                        if (is_numeric($saml_lib->getSessionExpiration())) {
+
+                            $session->set('saml_login_expire', $saml_lib->getSessionExpiration());
+                        } else {
+                            $session->set('saml_login_expire', time() + $this->params->get('default_session_time', 3600));
+                        }
                         $session->set('saml_login', 1);
                         return;
                     }

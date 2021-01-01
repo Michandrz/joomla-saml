@@ -10,13 +10,13 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
-use \Joomla\CMS\Table\Table;
-use \Joomla\CMS\Factory;
+use Joomla\CMS\Table\Table;
+use Joomla\CMS\Factory;
 /**
  *  Description of attribute
  * @since 1.7.0
  */
-class oneloginsamlModelAttribute extends \Joomla\CMS\MVC\Model\AdminModel
+class oneloginsamlModelAttribute extends Joomla\CMS\MVC\Model\AdminModel
 {    /**
      * 
      * Load the Table

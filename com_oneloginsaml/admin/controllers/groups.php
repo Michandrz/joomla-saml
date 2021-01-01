@@ -9,11 +9,14 @@
  * @author Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
+
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Router\Route;
 /**
  * Groups CRUDL controller
  * @since 1.7.0
  */
-class oneloginsamlControllerGroups extends \Joomla\CMS\MVC\Controller\BaseController
+class oneloginsamlControllerGroups extends Joomla\CMS\MVC\Controller\BaseController
 {
     /**
      * Process form and redirect
@@ -23,15 +26,15 @@ class oneloginsamlControllerGroups extends \Joomla\CMS\MVC\Controller\BaseContro
 	$input = $this->getInput('jform');
 	$model	 = $this->getModel('Group', 'oneloginsamlModel');
 	$model->save($input);
-	$msg = JText::_('COM_ONELOGIN_GROUP_MAPPING_SAVED');
-	$this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=groups', false), $msg);
+	$msg = Text::_('COM_ONELOGIN_GROUP_MAPPING_SAVED');
+	$this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=groups', false), $msg);
     }
     /**
      * Discard changes and redirect
      * @since 1.7.0
      */
     public function cancel() {
-	$this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=groups', false));
+	$this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=groups', false));
     }
     /**
      * redirect to blank edit form
@@ -39,7 +42,7 @@ class oneloginsamlControllerGroups extends \Joomla\CMS\MVC\Controller\BaseContro
      */
     public function newButton()
     {
-	$this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=group&layout=edit&id=0', false));
+	$this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=group&layout=edit&id=0', false));
     }
 
     /**
@@ -49,7 +52,7 @@ class oneloginsamlControllerGroups extends \Joomla\CMS\MVC\Controller\BaseContro
     public function editButton()
     {
 	$input	 = $this->getInput('cid');
-	$this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=group&layout=edit&id=' . $input[0], false));
+	$this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=group&layout=edit&id=' . $input[0], false));
 	
     }
 
@@ -73,7 +76,7 @@ class oneloginsamlControllerGroups extends \Joomla\CMS\MVC\Controller\BaseContro
 	JFactory::getApplication()->enqueueMessage($msg);
 	
 	//redirect to the table
-	$this->setRedirect(JRoute::_('index.php?option=com_oneloginsaml&view=groups', false));
+	$this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=groups', false));
     }
 
     /**

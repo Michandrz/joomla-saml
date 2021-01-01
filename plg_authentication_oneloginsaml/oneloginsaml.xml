@@ -1,12 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
 <extension type="plugin" group="authentication" method="upgrade">
     <name>plg_authentication_oneloginsaml</name>
     <author>OneLogin INC.</author>
     <authorEmail>support@onelogin.com</authorEmail>
     <authorUrl>onelogin.com</authorUrl>
     <creationDate>January 2019</creationDate>
-    <version>3.4.1</version>
+    <version>1.7.0</version>
     <copyright>Copyright (C) 2019 Onelogin Inc. All rights reserved.</copyright>
     <license>MIT</license>
+    <config>
+        <fields>
+            <fieldset name="plg_authentication_oneloginsaml" label="AUTH_PARAMS_LABEL" description="AUTH_PARAMS_DEC">
+                <field name="autocreate" type="radio"
+                       label="AUTOCREATE_LABEL"
+                       description="AUTOCREATE_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="updateuser" type="radio"
+                       label="UPDATEUSER_LABEL"
+                       description="UPDATEUSER_DEC"
+                       default="0" 
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="debug" type="radio"
+                       label="DEBUG_LABEL"
+                       description="DEBUG_DEC"
+                       default="0"
+                >
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </field>
+                <field name="default_session_time" type="number"
+                       label="DEFAULT_SESSION_TIME_LABEL"
+                       description="DEFAULT_SESSION_TIME_DEC"
+                       default="3600"
+                />
+        </fieldset>
+    </fields>
+    </config>
     <files>
         <filename plugin="oneloginsaml">oneloginsaml.php</filename>
         <filename>index.html</filename>

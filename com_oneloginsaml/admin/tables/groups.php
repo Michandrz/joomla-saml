@@ -15,7 +15,7 @@ defined('_JEXEC') or die('Restricted access');
  * Table class for groups
  * @since 1.7.0
  */
-class oneloginsamlTableGroups extends JTable
+class oneloginsamlTableGroups extends Joomla\CMS\Table\Table
 {
 	/**
 	 * Constructor

@@ -5,14 +5,14 @@
  *  @license     MIT
  *  @author Michael Andrzejewski<michael@jetskitechnologies.com>
  */
-use \Joomla\CMS\User\User;
-use \Joomla\CMS\Plugin\PluginHelper;
-use \Joomla\CMS\Component\ComponentHelper;
-use \Joomla\CMS\Factory;
+use Joomla\CMS\User\User;
+use Joomla\CMS\Plugin\PluginHelper;
+use Joomla\CMS\Component\ComponentHelper;
+use Joomla\CMS\Factory;
 /**
  * Model to handle various user/database interactions
  */
-class oneloginsamlModelUser extends \Joomla\CMS\MVC\Model\BaseDatabaseModel {
+class oneloginsamlModelUser extends Joomla\CMS\MVC\Model\BaseDatabaseModel {
 
     /**
      * Holds the idp and local account matchers

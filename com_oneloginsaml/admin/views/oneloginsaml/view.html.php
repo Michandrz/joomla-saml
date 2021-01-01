@@ -14,5 +14,5 @@ defined('_JEXEC') or die('Restricted access');
  * 
  * @since 1.7.0
  */
-class oneloginsamlViewOneloginsaml extends \Joomla\CMS\MVC\View\HtmlView {
+class oneloginsamlViewOneloginsaml extends Joomla\CMS\MVC\View\HtmlView {
 }

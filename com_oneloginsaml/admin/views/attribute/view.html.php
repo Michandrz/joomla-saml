@@ -9,10 +9,14 @@
  * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
+
+use Joomla\CMS\Language\Text;
+use Joomla\CMS\Factory;
+
 /**
  * View of an individual item
  */
-class oneloginsamlViewAttribute extends \Joomla\CMS\MVC\View\HtmlView
+class oneloginsamlViewAttribute extends Joomla\CMS\MVC\View\HtmlView
 {
 
     /**
@@ -68,7 +72,7 @@ class oneloginsamlViewAttribute extends \Joomla\CMS\MVC\View\HtmlView
      */
     protected function addToolBar()
     {
-	$input = JFactory::getApplication()->input;
+	$input = Factory::getApplication()->input;
 
 	// Hide Joomla Administrator Main menu
 	$input->set('hidemainmenu', true);
@@ -77,10 +81,10 @@ class oneloginsamlViewAttribute extends \Joomla\CMS\MVC\View\HtmlView
 
 	if ($isNew)
 	{
-	    $title = JText::_('COM_ONELOGIN_MANAGER_ATTRIBUTE_NEW');
+	    $title = Text::_('COM_ONELOGIN_MANAGER_ATTRIBUTE_NEW');
 	} else
 	{
-	    $title = JText::_('COM_ONELOGIN_MANAGER_ATTRIBUTE_EDIT');
+	    $title = Text::_('COM_ONELOGIN_MANAGER_ATTRIBUTE_EDIT');
 	}
 
 	JToolbarHelper::title($title, 'oneloginsaml');
