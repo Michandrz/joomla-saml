@@ -1,19 +1,20 @@
 <?php
 
 /**
- * @package     OneLogin SAML
- * @subpackage  com_onelogin
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author      Michael Andrzejewski<micahel@jetskitechnologies.com>
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Factory;
+
 /**
- *  Description of attribute
+ *  Model for handling attribute updates.
  * @since 1.7.0
  */
 class oneloginsamlModelAttribute extends Joomla\CMS\MVC\Model\AdminModel
@@ -60,8 +61,9 @@ class oneloginsamlModelAttribute extends Joomla\CMS\MVC\Model\AdminModel
     }
 
     /**
-     * 
-     * @return type
+     * Loads the data for the form class to inject.
+     * @return array data to be injected.
+     * @since 1.7.0
      */
     protected function loadFormData()
     {
@@ -79,8 +81,9 @@ class oneloginsamlModelAttribute extends Joomla\CMS\MVC\Model\AdminModel
     }
     
     /**
-     * 
-     * @param type $data
+     *  saves the data after changes made by the user
+     * @param array $data to be saved
+     * @since 1.7.0
      */
     public function save($data) {
 	    $table = $this->getTable();

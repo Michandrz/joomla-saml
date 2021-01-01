@@ -1,14 +1,18 @@
 <?php
-
 /**
- *  @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
- *  @license     MIT
- *  @author Michael Andrzejewski<michael@jetskitechnologies.com>
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
+ * 
+ * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
+ * @license     MIT
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
+
 use Joomla\CMS\User\User;
 use Joomla\CMS\Plugin\PluginHelper;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
+
 /**
  * Model to handle various user/database interactions
  */
@@ -17,18 +21,21 @@ class oneloginsamlModelUser extends Joomla\CMS\MVC\Model\BaseDatabaseModel {
     /**
      * Holds the idp and local account matchers
      * @var array
+     * @since 1.7.0
      */
     protected $matcher;
     
     /**
      * value to match against to find account
      * @var string
+     * @since 1.7.0
      */
     protected $matcherValue;
     
     /**
      * Saml Group attribute mapping
      * @var array
+     * @since 1.7.0
      */
     protected $groupMatcher;
     
@@ -58,10 +65,11 @@ class oneloginsamlModelUser extends Joomla\CMS\MVC\Model\BaseDatabaseModel {
         }
         return $this;
     }
+    
     /**
-     * 
-     * @param User $user
-     * @param array $saml_attrs
+     * Sets the groups for a specified user
+     * @param User $user user to set
+     * @param array $saml_attrs saml attributes
      * @since 1.7.0
      */
     public function setGroups(&$user, $saml_attrs) {
@@ -93,6 +101,7 @@ class oneloginsamlModelUser extends Joomla\CMS\MVC\Model\BaseDatabaseModel {
         $user->groups =  $groups;
         return $this;
     }
+    
     /**
      * Sets the Matchers for the samlparams to come through
      * 
@@ -157,11 +166,12 @@ class oneloginsamlModelUser extends Joomla\CMS\MVC\Model\BaseDatabaseModel {
         }
         return new User($this->_db->loadResult());
     }
+    
     /**
-     * Creates the user bypassing verification coming from the IDP
+     * Creates the user coming from the IDP
      * @param type $saml_attrs
      * @return boolean|User User Object on success, false on failure
-     * @todo wite this function
+     * @since 1.7.0
      */
     public function createUser($saml_attrs) {
         //first set the matcher attributes

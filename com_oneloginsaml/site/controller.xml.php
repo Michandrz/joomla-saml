@@ -1,11 +1,10 @@
 <?php
-
 /**
- * @package     OneLogin SAML.Component
- * @subpackage  oneloginsaml
- *
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
+ * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
- * @license     MIT 
+ * @license     MIT
  * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die;
@@ -23,7 +22,8 @@ class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
 
     /**
      *
-     * @var \OneLogin_Saml2_Auth_Joomla
+     * @var samlJoomla
+     * @since 1.7.0
      */
     protected $_oneloginPhpSaml;
 
@@ -33,12 +33,9 @@ class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
      * @param   array  $config  An optional associative array of configuration settings.
      * Recognized key values include 'name', 'default_task', 'model_path', and
      * 'view_path' (this list is not meant to be comprehensive).
-     *
      * @since   1.7.0
      */
     public function __construct($config = array()) {
-
-
         //make the Library easily accessable
         $this->_oneloginPhpSaml = new samlJoomla();
         parent::__construct($config);
@@ -46,6 +43,7 @@ class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
 
     /**
      * Override default task
+     * @since 1.7.0
      */
     public function __default() {
         $this->getMetadata();
@@ -55,7 +53,8 @@ class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
      * echo the metadata
      * 
      * @return $this
-     * @throws OneLogin_Saml2_Error
+     * @throws Error
+     * @since 1.7.0
      */
     public function getMetadata() {
         $settings = $this->_oneloginPhpSaml->getSettings();

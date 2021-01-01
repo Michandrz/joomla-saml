@@ -1,13 +1,13 @@
 <?php
-
 /**
- * @package     OneLogin SAML
- * @subpackage  com_onelogin
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author      Michael Andrzejewski<micahel@jetskitechnologies.com>
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
+
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Table\Table;
@@ -30,6 +30,7 @@ class oneloginsamlModelConfig extends Joomla\CMS\MVC\Model\AdminModel {
         'plg_content_oneloginsaml'          => array('plugin','content', 'plugins/content/oneloginsaml/oneloginsaml.xml'),
         'oneloginsaml'                      => array('library','', 'libraries/oneloginsaml/oneloginsaml.xml'),
         );
+    
     /**
      * 
      * Load the Table
@@ -52,6 +53,7 @@ class oneloginsamlModelConfig extends Joomla\CMS\MVC\Model\AdminModel {
      * @param string $subset Only used for Plugins, Need to know the plugin type 'system', 'content', 'authentication', etc.
      * @return Registry extension params
      * @throws Exception when unable to determine extension type
+     * @since 1.7.0
      */
     public function getParams($type, $name, $subset = null) {
         switch ($type) {
@@ -76,7 +78,17 @@ class oneloginsamlModelConfig extends Joomla\CMS\MVC\Model\AdminModel {
 
         return $Params;
     }
-
+    
+    /**
+     * Saves parametars of extension regardless of type
+     * @param string $type Extension type plugin|component|module|library
+     * @param string $name name of the extension to save
+     * @param string|null $subset only set this for plugins, set it to plugin type
+     * @param Registry $params Extension params to be saved
+     * @return boolean true at end
+     * @throws Exception if unable to determine extension type.
+     * @since 1.7.0
+     */
     public function saveParams($type, $name, $subset = null, $params) {
         switch ($type) {
             case 'plugin':
@@ -107,6 +119,11 @@ class oneloginsamlModelConfig extends Joomla\CMS\MVC\Model\AdminModel {
         return true;
     }
     
+    /**
+     * Reads the manifest files of all registered extensions to provide configuration fields to the form class
+     * @return string XML Document formatted for the Form class
+     * @since 1.7.0
+     */
     public function getFields() {
         $return = new DOMDocument('1.0');
         $return->loadXML('<form></form>');
@@ -138,8 +155,6 @@ class oneloginsamlModelConfig extends Joomla\CMS\MVC\Model\AdminModel {
         $return = array();
 
         foreach ($this->__paramsToPull as $name => $settings) {
-            //$return->append($name, $this->getParams($settings[0], $name, $value[1]));
-            
             foreach($this->getParams($settings[0], $name, $settings[1])->toArray() as $key => $value) {
                 $return[$name . '.' . $key] = $value;
             }
@@ -172,8 +187,9 @@ class oneloginsamlModelConfig extends Joomla\CMS\MVC\Model\AdminModel {
     }
 
     /**
-     * Save the form
+     * Save the form data
      * @param array $data data in feild=>value format
+     * @since 1.7.0
      */
     public function save($data) {
         $cache = array();

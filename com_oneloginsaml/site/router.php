@@ -1,11 +1,10 @@
 <?php
-
 /**
- * @package     OneLogin SAML.Component
+ * @package     Joomla-Saml
  * @subpackage  com_oneloginsaml
- *
+ * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
- * @license     MIT 
+ * @license     MIT
  * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die;
@@ -16,6 +15,11 @@ defined('_JEXEC') or die;
  */
 class oneloginsamlRouter extends \Joomla\CMS\Component\Router\RouterView {
     
+    /**
+     * 
+     * @inheritdoc
+     * @since 1.7.0
+     */
     public function __construct($app = null, $menu = null) {
         JLoader::register('oneloginsamlTaskRules', JPATH_BASE . '\\components\\com_oneloginsaml\\taskRules.php');
         $taskRule = new oneloginsamTaskRules($this);

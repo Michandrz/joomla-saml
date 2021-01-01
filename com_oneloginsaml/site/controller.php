@@ -1,31 +1,28 @@
 <?php
-
 /**
- * @package     OneLogin SAML.Component
- * @subpackage  oneloginsaml
- *
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
+ * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
- * @license     MIT 
+ * @license     MIT
  * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die;
 
-use Joomla\CMS\Plugin\PluginHelper;
-use Joomla\Registry\Registry;
 use Joomla\CMS\Factory;
 use OneLogin\Saml2\samlJoomla;
 
 /**
  * Component main controller
  * 
- * @todo program redirect
  * @since 1.7.0
  */
 class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
 
     /**
      *
-     * @var \OneLogin_Saml2_Auth_Joomla
+     * @var samlJoomla
+     * @since 1.7.0
      */
     protected $_oneloginPhpSaml;
 
@@ -48,7 +45,8 @@ class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
     
     /**
      * Redirect to IDP for Login
-     * @param string $redirect Base 64 encoded URL
+     * @param string $redirect encoded URL to end up post login
+     * @since 1.7.0
      */
     public function samlLogin($redirect = null) {
         
@@ -57,6 +55,12 @@ class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
         return $this;
     }
     
+    /**
+     * Redirect to IDP for logout
+     * @param string $redirect encoded URL to end up post login 
+     * @return $this
+     * @since 1.7.0
+     */
     public function samlLogout($redirect = null) {
         $this->setRedirect($this->_oneloginPhpSaml->logout('index.php', array(), null, null, true));
         
@@ -64,8 +68,13 @@ class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
         $app->logout();
         return $this;
     }
-
-
+    
+    /**
+     * Process the logon from the IDP
+     * @param string $redirect Base 64 encoded url to end up 
+     * @return $this chainloading
+     * @since 1.7.0
+     */
     public function acs($redirect = null) {
         //process the responce
         $this->_oneloginPhpSaml->processResponse();
@@ -79,9 +88,11 @@ class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
         //redirect
         $this->setRedirect(urldecode($app->input->get('RelayState', 'index.php', 'raw')));
     }
+    
     /**
      * Redirect to IDP for a cookie refresh
      * @param string $redirect Base 64 encoded URL
+     * @since 1.7.0
      */
     public function refreshCookie($redirect = null) {
 
@@ -91,9 +102,10 @@ class oneloginsamlController extends Joomla\CMS\MVC\Controller\BaseController {
         
     }
     
-    /**
-     * Post IDP Logout
+   /**
+     * process IDP logout and redirect
      * @param string $redirect Base 64 encoded URL
+     * @since 1.7.0
      */
     public function sls($redirect = null) {
         

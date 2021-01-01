@@ -1,13 +1,13 @@
 <?php
-
 /**
- * @package     OneLogin SAML
- * @subpackage  com_onelogin
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author      Michael Andrzejewski<micahel@jetskitechnologies.com>
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
+
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Factory;

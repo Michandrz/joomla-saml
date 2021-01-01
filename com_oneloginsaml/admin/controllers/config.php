@@ -1,7 +1,7 @@
 <?php
 
 /**
- * @package     OneLogin SAML
+ * @package     Joomla-Saml
  * @subpackage  com_oneloginsaml
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
@@ -12,6 +12,7 @@ defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+
 /**
  * Config controller
  * @since 1.7.0

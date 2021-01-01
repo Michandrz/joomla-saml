@@ -1,14 +1,15 @@
 <?php
-
 /**
- * @package     OneLogin SAML
- * @subpackage  com_onelogin
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author      Michael Andrzejewski<micahel@jetskitechnologies.com>
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
+
 defined('_JEXEC') or die('Restricted access');
+
 use Joomla\CMS\Table\Table;
 use Joomla\CMS\Factory;
 
@@ -57,6 +58,7 @@ class oneloginsamlModelGroup extends  Joomla\CMS\MVC\Model\AdminModel
 
 	return $form;
     }
+    
     /**
      * Loads the form data and returns it in a feild=>value array
      * @return array Form data
@@ -80,6 +82,7 @@ class oneloginsamlModelGroup extends  Joomla\CMS\MVC\Model\AdminModel
     /**
      * Save the form
      * @param array $data data in feild=>value format
+     * @since 1.7.0
      */
     public function save($data) {
 	    $table = $this->getTable();

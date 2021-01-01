@@ -1,8 +1,8 @@
 <?php
 
 /**
- * @package     OneLogin SAML
- * @subpackage  
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
@@ -31,6 +31,11 @@ class oneloginsamlControllerAttributes extends Joomla\CMS\MVC\Controller\BaseCon
         $msg = Text::_('COM_ONELOGIN_ATTRIBUTE_MAPPING_SAVED');
         $this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=attributes', false), $msg);
     }
+    
+    /**
+     * Sets the attribute to be used by the library for matching
+     * @since 1.7.0
+     */
     public function setMatcher() {
         $input = $this->getInput('id', null, 'integer');
         if($input != null) {
@@ -68,7 +73,7 @@ class oneloginsamlControllerAttributes extends Joomla\CMS\MVC\Controller\BaseCon
 
     /**
      * Deletes a record provided by JINPUT and redirects to the view.
-     * 
+     * @since 1.7.0
      */
     public function delete() {
         //look for what I am deleting
@@ -94,7 +99,7 @@ class oneloginsamlControllerAttributes extends Joomla\CMS\MVC\Controller\BaseCon
      * @param string $key What input value?
      * @param mixed $defaultValue Default, if no value
      * @param string $type Filter to apply 
-     * @return mixed
+     * @return mixed input value
      */
     protected function getInput($key, $defaultValue = array(), $type = 'array') {
         //load the input class

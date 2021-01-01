@@ -1,13 +1,13 @@
 <?php
-
 /**
- * @package     OneLogin SAML.Component
+ * @package     Joomla-Saml
  * @subpackage  com_oneloginsaml
- *
+ * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
- * @license     MIT 
+ * @license     MIT
  * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
+
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Component\Router\RouterView;
@@ -15,7 +15,7 @@ use Joomla\CMS\Component\Router\RouterView;
 /**
  * Rule to process simple tasks...why this isn't standard in joomla
  *
- * @since  3.4
+ * @since  1.7.0
  */
 class oneloginsamlTaskRules implements \Joomla\CMS\Component\Router\Rules\RulesInterface
 {

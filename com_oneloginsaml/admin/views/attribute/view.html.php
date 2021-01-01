@@ -1,8 +1,7 @@
 <?php
-
 /**
- * @package     OneLogin SAML
- * @subpackage  
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
@@ -36,10 +35,9 @@ class oneloginsamlViewAttribute extends Joomla\CMS\MVC\View\HtmlView
 
     /**
      * Display the Attribute view
-     *
      * @param   string  $tpl  The name of the template file to parse; automatically searches through the template paths.
-     *
      * @return  void
+     * @since 1.7.0
      */
     public function display($tpl = null)
     {
@@ -68,7 +66,7 @@ class oneloginsamlViewAttribute extends Joomla\CMS\MVC\View\HtmlView
      *
      * @return  void
      *
-     * @since   1.6
+     * @since   1.7.0
      */
     protected function addToolBar()
     {

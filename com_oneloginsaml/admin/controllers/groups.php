@@ -1,17 +1,17 @@
 <?php
-
 /**
- * @package     OneLogin SAML
- * @subpackage  
+ * @package     Joomla-Saml
+ * @subpackage  com_oneloginsaml
  * 
  * @copyright   Copyright (C) 2019 OneLogin, Inc. All rights reserved.
  * @license     MIT
- * @author Michael Andrzejewski<michael@jetskitechnologies.com>
+ * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\Router\Route;
+
 /**
  * Groups CRUDL controller
  * @since 1.7.0
@@ -29,6 +29,7 @@ class oneloginsamlControllerGroups extends Joomla\CMS\MVC\Controller\BaseControl
 	$msg = Text::_('COM_ONELOGIN_GROUP_MAPPING_SAVED');
 	$this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=groups', false), $msg);
     }
+    
     /**
      * Discard changes and redirect
      * @since 1.7.0
@@ -36,6 +37,7 @@ class oneloginsamlControllerGroups extends Joomla\CMS\MVC\Controller\BaseControl
     public function cancel() {
 	$this->setRedirect(Route::_('index.php?option=com_oneloginsaml&view=groups', false));
     }
+    
     /**
      * redirect to blank edit form
      * @since 1.7.0
@@ -85,7 +87,7 @@ class oneloginsamlControllerGroups extends Joomla\CMS\MVC\Controller\BaseControl
      * @param string $key What input value?
      * @param mixed $defaultValue Default, if no value
      * @param string $type Filter to apply 
-     * @return mixed
+     * @return mixed input value 
      * @since 1.7.0
      */
     protected function getInput($key, $defaultValue = array(), $type = 'array')
