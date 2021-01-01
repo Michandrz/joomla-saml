@@ -10,6 +10,8 @@
  */
 defined('_JEXEC') or die('Restricted access');
 
+use Joomla\CMS\Language\Text;
+
 /**
  * View list of attributes 
  */
@@ -60,7 +62,7 @@ class oneloginsamlViewAttributes extends Joomla\CMS\MVC\View\HtmlView
      */
     protected function addToolBar()
     {
-	JToolbarHelper::title(JText::_('COM_ONELOGIN_MANAGER_ATTRIBUTES'));
+	JToolbarHelper::title(Text::_('COM_ONELOGIN_MANAGER_ATTRIBUTES'));
 	JToolbarHelper::addNew('attributes.newButton');
 	JToolbarHelper::editList('attributes.editButton');
 	JToolbarHelper::deleteList('', 'attributes.delete');

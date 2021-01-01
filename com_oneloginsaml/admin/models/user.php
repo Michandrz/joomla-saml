@@ -71,6 +71,7 @@ class oneloginsamlModelUser extends Joomla\CMS\MVC\Model\BaseDatabaseModel {
      * @param User $user user to set
      * @param array $saml_attrs saml attributes
      * @since 1.7.0
+     * @todo handle multiple group matchers
      */
     public function setGroups(&$user, $saml_attrs) {
         

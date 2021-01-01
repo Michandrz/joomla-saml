@@ -70,9 +70,9 @@ Use Joomla\CMS\Router\Route;
                         </td>
                         <td>
                             <?php if ($row->match) { ?>
-                                <span>Current</span>
+                                <span><?php Text::_('COM_ONELOGIN_ATTR_CURRENT_MATCHER'); ?></span>
                             <?php } else { ?>
-                                <a href="<?php echo Route::_('index.php?option=com_oneloginsaml&task=attributes.setMatcher&id=' . $row->id); ?>">Set Matcher</a>
+                                <a href="<?php echo Route::_('index.php?option=com_oneloginsaml&task=attributes.setMatcher&id=' . $row->id); ?>"><?php echo Text::_('COM_ONELOGIN_ATTR_SET_MATCHER'); ?> </a>
                             <?php } ?>
                         </td>
                         <td align="center">

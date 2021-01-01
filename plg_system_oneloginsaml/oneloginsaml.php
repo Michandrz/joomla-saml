@@ -18,6 +18,13 @@ use Joomla\CMS\Language\Text;
 class PlgSystemOneloginsaml extends \Joomla\CMS\Plugin\CMSPlugin {
 
     /**
+     *
+     * @var bool load the language autoloader
+     * @since 1.7.0
+     */
+    protected $autoloadLanguage = true;
+
+    /**
      * Register the library into the Joomla application
      * @since 1.7.0
      * @todo code to check for saml auth expiry
@@ -49,7 +56,7 @@ class PlgSystemOneloginsaml extends \Joomla\CMS\Plugin\CMSPlugin {
             $response = Factory::getDocument();
             $content = 'jQuery( document ).ready(function() {
                 jQuery("button.login-button").parent().after("<a href=\"index.php?option=plg_onelogin&task=login.samlLogin\" class=\"btn btn-primary btn-block btn-large login-button\">'
-                    . Text::_('SAML_LOGIN_BUTTON') . 
+                    . Text::_('SAML_LOGIN_BUTTON', true) . 
                     '</a>  ");
             });';
             $response->addScriptDeclaration($content);

@@ -41,7 +41,6 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
 
                 //we're authenticed to the IDP, lets load the User data model
                 BaseDatabaseModel::addIncludePath(JPATH_ADMINISTRATOR . '/components/com_oneloginsaml/models');
-                die(print(JPATH_ADMINISTRATOR . '/components/com_oneloginsaml/models'));
                 $oneloginUserModel = BaseDatabaseModel::getInstance('User', 'oneloginsamlModel');
 
                 //populate the matcher
@@ -115,7 +114,7 @@ class PlgAuthenticationOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
                     }
                 } else {
                     $response->status = Authentication::STATUS_DENIED;
-                    $response->message = 'USER_NOT_EXISTS_AND NOT ALLOWED TO CREATE';
+                    $response->message = 'USER_NOT_EXISTS_AND_NOT ALLOWED TO CREATE';
                     return;
                 }
             } else {

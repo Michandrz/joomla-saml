@@ -11,6 +11,7 @@
 defined('_JEXEC') or die('Restricted access');
 
 use Joomla\CMS\Toolbar\ToolbarHelper;
+use Joomla\CMS\Language\Text;
 
 /**
  * View list of all group mappings
@@ -51,7 +52,7 @@ class oneloginsamlViewGroups extends Joomla\CMS\MVC\View\HtmlView
      */
     protected function addToolBar()
     {
-	ToolbarHelper::title(JText::_('COM_ONELOGIN_MANAGER_GROUPS'));
+	ToolbarHelper::title(Text::_('COM_ONELOGIN_MANAGER_GROUPS'));
 	ToolbarHelper::addNew('groups.newButton');
 	ToolbarHelper::editList('groups.editButton');
 	ToolbarHelper::deleteList('', 'groups.delete');

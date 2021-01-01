@@ -10,34 +10,34 @@
     <license>MIT</license>
     <config>
         <fields>
-            <fieldset name="plg_authentication_oneloginsaml" label="AUTH_PARAMS_LABEL" description="AUTH_PARAMS_DEC">
+            <fieldset name="plg_authentication_oneloginsaml" label="PLG_AUTH_ONELOGINSAML">
                 <field name="autocreate" type="radio"
-                       label="AUTOCREATE_LABEL"
-                       description="AUTOCREATE_DEC"
+                       label="PLG_AUTH_ONELOGINSAML_AUTOCREATE_LABEL"
+                       description="PLG_AUTH_ONELOGINSAML_AUTOCREATE_DEC"
                        default="0"
                 >
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </field>
                 <field name="updateuser" type="radio"
-                       label="UPDATEUSER_LABEL"
-                       description="UPDATEUSER_DEC"
+                       label="PLG_AUTH_ONELOGINSAML_UPDATEUSER_LABEL"
+                       description="PLG_AUTH_ONELOGINSAML_UPDATEUSER_DEC"
                        default="0" 
                 >
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </field>
                 <field name="debug" type="radio"
-                       label="DEBUG_LABEL"
-                       description="DEBUG_DEC"
+                       label="PLG_AUTH_ONELOGINSAML_DEBUG_LABEL"
+                       description="PLG_AUTH_ONELOGINSAML_DEBUG_DEC"
                        default="0"
                 >
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </field>
                 <field name="default_session_time" type="number"
-                       label="DEFAULT_SESSION_TIME_LABEL"
-                       description="DEFAULT_SESSION_TIME_DEC"
+                       label="PLG_AUTH_ONELOGINSAML_DEFAULT_SESSION_TIME_LABEL"
+                       description="PLG_AUTH_ONELOGINSAML_DEFAULT_SESSION_TIME_DEC"
                        default="3600"
                 />
         </fieldset>

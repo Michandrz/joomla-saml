@@ -143,12 +143,6 @@
             <filename>oneloginsaml.php</filename>
             <filename>login.php</filename>
         </files>
-        <languages folder="admin">
-            <language tag="en-US">language/en-US/en-US.com_oneloginsaml.ini</language>
-            <language tag="en-US">language/en-US/en-US.com_oneloginsaml.sys.ini</language>
-            <language tag="en-GB">language/en-GB/en-GB.com_oneloginsaml.ini</language>
-            <language tag="en-GB">language/en-GB/en-GB.com_oneloginsaml.sys.ini</language>
-        </languages>
     </administration>
     <updateservers>
         <server type="collection">https://raw.githubusercontent.com/onelogin/joomla-saml/master/updater.xml</server>

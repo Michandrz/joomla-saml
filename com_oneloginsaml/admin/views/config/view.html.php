@@ -9,7 +9,7 @@
  * @author      Michael Andrzejewski<michael@jetskitechnologies.com>
  */
 defined('_JEXEC') or die('Restricted access');
-
+use Joomla\CMS\Language\Text;
 /**
  * View for Onelogin Configuration
  */
@@ -68,7 +68,7 @@ class oneloginsamlViewConfig extends Joomla\CMS\MVC\View\HtmlView
      */
     protected function addToolBar()
     {
-	JToolbarHelper::title('COM_ONELOGIN_CONFIG_EDIT', 'oneloginsaml');
+	JToolbarHelper::title(Text::_('COM_ONELOGIN_CONFIG_EDIT'), 'oneloginsaml');
 	JToolbarHelper::save('config.save');
 	JToolbarHelper::cancel('config.cancel','JTOOLBAR_CLOSE');
     }

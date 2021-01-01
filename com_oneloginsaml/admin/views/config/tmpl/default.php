@@ -37,7 +37,7 @@ use Joomla\CMS\HTML\HTMLHelper;
         foreach ($this->form->getFieldsets() as $fieldset) {
             ?>
             <div id="page-<?php echo $fieldset->name; ?>" class="tab-pane <?php if ($first) { ?>active<?php } ?>">
-                <legend><?php echo Text::_('COM_ONELOGINSAML_CONFIG_PAGE_' . strtoupper($fieldset->name)); ?></legend>
+                <legend><?php echo Text::_( strtoupper($fieldset->name)); ?></legend>
                 <div class="row-fluid"><p class="center"><?php echo $fieldset->description; ?><p></div>
                 <fieldset name="<?php echo $fieldset->name; ?>" class="form-horizontal">
                     <?php

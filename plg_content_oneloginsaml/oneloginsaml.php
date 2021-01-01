@@ -16,6 +16,13 @@ use Joomla\CMS\Language\Text;
 class PlgContentOneloginsaml extends Joomla\CMS\Plugin\CMSPlugin {
 
     /**
+     *
+     * @var bool load the language autoloader
+     * @since 1.7.0
+     */
+    protected $autoloadLanguage = true;
+
+    /**
      * Grabs the login module and injects a samlLogin button
      * @param Object $module A reference to a Module object that holds all the data of the module
      * @param JRegistry $params Registry of module params
